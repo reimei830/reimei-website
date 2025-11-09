@@ -1,9 +1,9 @@
 export default function Achievements() {
   const clients = [
-    { name: 'トヨタ自動車', industry: '自動車製造' },
-    { name: '三菱自動車', industry: '自動車製造' },
-    { name: 'スズキ自動車', industry: '自動車製造' },
-    { name: '川崎重工業', industry: '重工業' },
+    { name: 'T自動車', industry: '自動車製造' },
+    { name: 'M自動車', industry: '自動車製造' },
+    { name: 'S自動車', industry: '自動車製造' },
+    { name: 'K重工業', industry: '航空宇宙' },
   ]
 
   return (

@@ -39,15 +39,7 @@ export default function Company() {
                   <td className="py-4 px-4 font-bold text-gray-700 bg-gray-50">電話番号</td>
                   <td className="py-4 px-4 text-gray-600">
                     <a href="tel:08036257174" className="text-reimei-blue hover:underline">
-                      080-3625-7174
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-4 font-bold text-gray-700 bg-gray-50">メール</td>
-                  <td className="py-4 px-4 text-gray-600">
-                    <a href="mailto:r.horiuchi@reimei-inc.com" className="text-reimei-blue hover:underline">
-                      r.horiuchi@reimei-inc.com
+                      052-893-6763
                     </a>
                   </td>
                 </tr>

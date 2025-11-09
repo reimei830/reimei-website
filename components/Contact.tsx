@@ -142,16 +142,7 @@ export default function Contact() {
               </svg>
               <h3 className="font-bold text-gray-800 mb-2">電話</h3>
               <a href="tel:08036257174" className="text-reimei-blue hover:underline">
-                080-3625-7174
-              </a>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <svg className="w-12 h-12 text-reimei-blue mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              <h3 className="font-bold text-gray-800 mb-2">メール</h3>
-              <a href="mailto:r.horiuchi@reimei-inc.com" className="text-reimei-blue hover:underline break-all">
-                r.horiuchi@reimei-inc.com
+                052-893-6763
               </a>
             </div>
             <div className="bg-gray-50 p-6 rounded-lg">
