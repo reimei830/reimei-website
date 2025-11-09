@@ -155,7 +155,7 @@ colors: {
 
 株式会社黎明  
 Email: r.horiuchi@reimei-inc.com  
-TEL: 080-3625-7174
+TEL: 052-893-6763
 
 ## ライセンス
 
