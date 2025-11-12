@@ -28,6 +28,7 @@ export default function Services() {
                 <span className="bg-reimei-light-blue text-white px-3 py-1 rounded-full text-sm">三菱電機</span>
                 <span className="bg-reimei-light-blue text-white px-3 py-1 rounded-full text-sm">KEYENCE</span>
                 <span className="bg-reimei-light-blue text-white px-3 py-1 rounded-full text-sm">TOYOPUC</span>
+		<span className="bg-reimei-light-blue text-white px-3 py-1 rounded-full text-sm">WAGO</span>
               </div>
               <h4 className="font-bold text-gray-800 mt-4 mb-3">特徴</h4>
               <ul className="space-y-2 text-gray-600">
