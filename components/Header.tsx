@@ -18,19 +18,19 @@ export default function Header() {
 
           {/* デスクトップメニュー */}
           <div className="hidden md:flex space-x-8">
-            <Link href="#services" className="text-gray-700 hover:text-reimei-blue transition-colors font-medium">
-              事業内容
-            </Link>
-            <Link href="#achievements" className="text-gray-700 hover:text-reimei-blue transition-colors font-medium">
-              実績
-            </Link>
-            <Link href="#company" className="text-gray-700 hover:text-reimei-blue transition-colors font-medium">
-              会社概要
-            </Link>
-            <Link href="#contact" className="bg-reimei-blue text-white px-6 py-2 rounded-md hover:bg-reimei-light-blue transition-colors font-medium">
-              お問い合わせ
-            </Link>
-          </div>
+  <Link href="/#services" className="text-gray-700 hover:text-reimei-blue transition-colors font-medium">
+    事業内容
+  </Link>
+  <Link href="/#achievements" className="text-gray-700 hover:text-reimei-blue transition-colors font-medium">
+    実績
+  </Link>
+  <Link href="/#company" className="text-gray-700 hover:text-reimei-blue transition-colors font-medium">
+    会社概要
+  </Link>
+  <Link href="/contact" className="bg-reimei-blue text-white px-6 py-2 rounded-md hover:bg-reimei-light-blue transition-colors font-medium">
+    お問い合わせ
+  </Link>
+</div>
 
           {/* モバイルメニューボタン */}
           <button
@@ -49,23 +49,23 @@ export default function Header() {
 
         {/* モバイルメニュー */}
         {isMenuOpen && (
-          <div className="md:hidden pb-4">
-            <div className="flex flex-col space-y-3">
-              <Link href="#services" className="text-gray-700 hover:text-reimei-blue py-2" onClick={() => setIsMenuOpen(false)}>
-                事業内容
-              </Link>
-              <Link href="#achievements" className="text-gray-700 hover:text-reimei-blue py-2" onClick={() => setIsMenuOpen(false)}>
-                実績
-              </Link>
-              <Link href="#company" className="text-gray-700 hover:text-reimei-blue py-2" onClick={() => setIsMenuOpen(false)}>
-                会社概要
-              </Link>
-              <Link href="#contact" className="bg-reimei-blue text-white px-6 py-2 rounded-md hover:bg-reimei-light-blue text-center" onClick={() => setIsMenuOpen(false)}>
-                お問い合わせ
-              </Link>
-            </div>
-          </div>
-        )}
+  <div className="md:hidden pb-4">
+    <div className="flex flex-col space-y-3">
+      <Link href="/#services" className="text-gray-700 hover:text-reimei-blue py-2" onClick={() => setIsMenuOpen(false)}>
+        事業内容
+      </Link>
+      <Link href="/#achievements" className="text-gray-700 hover:text-reimei-blue py-2" onClick={() => setIsMenuOpen(false)}>
+        実績
+      </Link>
+      <Link href="/#company" className="text-gray-700 hover:text-reimei-blue py-2" onClick={() => setIsMenuOpen(false)}>
+        会社概要
+      </Link>
+      <Link href="/contact" className="bg-reimei-blue text-white px-6 py-2 rounded-md hover:bg-reimei-light-blue text-center" onClick={() => setIsMenuOpen(false)}>
+        お問い合わせ
+      </Link>
+    </div>
+  </div>
+)}
       </nav>
     </header>
   )

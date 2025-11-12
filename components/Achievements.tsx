@@ -1,16 +1,16 @@
 export default function Achievements() {
   const clients = [
-    { name: 'T自動車', industry: '自動車製造' },
-    { name: 'M自動車', industry: '自動車製造' },
-    { name: 'S自動車', industry: '自動車製造' },
-    { name: 'K重工業', industry: '航空宇宙' },
+    { name: '三菱自動車工業株式会社', industry: '自動車製造' },
+    { name: 'トヨタ自動車株式会社', industry: '自動車製造' },
+    { name: 'スズキ株式会社', industry: '自動車製造' },
+    { name: 'マツダ株式会社', industry: '自動車製造' },
   ]
 
   return (
     <section id="achievements" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-reimei-blue mb-4">導入実績</h2>
+          <h2 className="text-4xl font-bold text-reimei-blue mb-4">エンドユーザー</h2>
           <p className="text-xl text-gray-600">
             大手企業をはじめ、多くのお客様にご採用いただいています
           </p>
@@ -28,22 +28,22 @@ export default function Achievements() {
           ))}
         </div>
 
-        <div className="bg-gradient-to-r from-reimei-blue to-reimei-light-blue rounded-lg p-8 md:p-12 text-white">
-          <div className="grid md:grid-cols-3 gap-8 text-center">
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">5+</div>
-              <div className="text-lg">年の実績</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">50+</div>
-              <div className="text-lg">プロジェクト</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">100%</div>
-              <div className="text-lg">顧客満足度</div>
-            </div>
-          </div>
-        </div>
+<div className="bg-gradient-to-r from-reimei-blue to-reimei-light-blue rounded-lg p-8 md:p-12 text-white">
+  <div className="grid md:grid-cols-3 gap-8 text-center">
+    <div>
+      <div className="text-4xl md:text-5xl font-bold mb-2">100以上</div>
+      <div className="text-lg">年の実績</div>
+    </div>
+    <div>
+      <div className="text-4xl md:text-5xl font-bold mb-2">20以上</div>
+      <div className="text-lg">プロジェクト</div>
+    </div>
+    <div>
+      <div className="text-4xl md:text-5xl font-bold mb-2">99%</div>
+      <div className="text-lg">顧客満足度</div>
+    </div>
+  </div>
+</div>
 
         <div className="mt-12 bg-gray-50 rounded-lg p-8">
           <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">対応可能な用途</h3>

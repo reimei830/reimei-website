@@ -38,7 +38,7 @@ export default function Company() {
                 <tr>
                   <td className="py-4 px-4 font-bold text-gray-700 bg-gray-50">電話番号</td>
                   <td className="py-4 px-4 text-gray-600">
-                    <a href="tel:08036257174" className="text-reimei-blue hover:underline">
+                    <a href="tel:0528936763" className="text-reimei-blue hover:underline">
                       052-893-6763
                     </a>
                   </td>
@@ -87,11 +87,11 @@ export default function Company() {
             一緒に日本のものづくりの未来を創りませんか？
           </p>
           <a
-            href="#contact"
-            className="inline-block bg-white text-reimei-blue px-8 py-3 rounded-md font-bold hover:bg-gray-100 transition-colors"
-          >
-            採用について問い合わせる
-          </a>
+            href="/contact"
+  		className="inline-block bg-white text-reimei-blue px-8 py-3 rounded-md font-bold hover:bg-gray-100 transition-colors"
+		>
+  		採用について問い合わせる
+		</a>
         </div>
       </div>
     </section>

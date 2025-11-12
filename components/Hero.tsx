@@ -16,11 +16,11 @@ export default function Hero() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
-              href="#contact"
-              className="bg-white text-reimei-blue px-8 py-4 rounded-md font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg"
-            >
-              お問い合わせ
-            </Link>
+  		href="/contact"
+  		className="bg-white text-reimei-blue px-8 py-4 rounded-md font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg"
+		>
+  		お問い合わせ
+		</Link>
             <Link
               href="#services"
               className="border-2 border-white text-white px-8 py-4 rounded-md font-bold text-lg hover:bg-white hover:text-reimei-blue transition-colors"

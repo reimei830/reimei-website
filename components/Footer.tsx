@@ -25,27 +25,27 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">サイトマップ</h3>
             <ul className="space-y-2">
-              <li>
-                <Link href="#services" className="text-gray-300 hover:text-white transition-colors">
-                  事業内容
-                </Link>
-              </li>
-              <li>
-                <Link href="#achievements" className="text-gray-300 hover:text-white transition-colors">
-                  実績
-                </Link>
-              </li>
-              <li>
-                <Link href="#company" className="text-gray-300 hover:text-white transition-colors">
-                  会社概要
-                </Link>
-              </li>
-              <li>
-                <Link href="#contact" className="text-gray-300 hover:text-white transition-colors">
-                  お問い合わせ
-                </Link>
-              </li>
-            </ul>
+  <li>
+    <Link href="/#services" className="text-gray-300 hover:text-white transition-colors">
+      事業内容
+    </Link>
+  </li>
+  <li>
+    <Link href="/#achievements" className="text-gray-300 hover:text-white transition-colors">
+      実績
+    </Link>
+  </li>
+  <li>
+    <Link href="/#company" className="text-gray-300 hover:text-white transition-colors">
+      会社概要
+    </Link>
+  </li>
+  <li>
+    <Link href="/contact" className="text-gray-300 hover:text-white transition-colors">
+      お問い合わせ
+    </Link>
+  </li>
+</ul>
           </div>
         </div>
 
