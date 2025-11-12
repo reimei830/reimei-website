@@ -7,9 +7,9 @@ interface LogoProps {
 
 export default function Logo({ size = 'medium', className = '' }: LogoProps) {
   const sizes = {
-    small: { width: 120, height: 104 },
-    medium: { width: 200, height: 174 },
-    large: { width: 300, height: 261 },
+    small: { width: 80, height: 70 },
+    medium: { width: 150, height: 130 },
+    large: { width: 250, height: 217 },
   }
 
   const { width, height } = sizes[size]
@@ -22,6 +22,7 @@ export default function Logo({ size = 'medium', className = '' }: LogoProps) {
       height={height}
       className={className}
       priority
+      style={{ width: 'auto', height: 'auto', maxHeight: `${height}px` }}
     />
   )
 }

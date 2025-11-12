@@ -32,11 +32,11 @@ export default function Achievements() {
   <div className="grid md:grid-cols-3 gap-8 text-center">
     <div>
       <div className="text-4xl md:text-5xl font-bold mb-2">100以上</div>
-      <div className="text-lg">年の実績</div>
+      <div className="text-lg">年間の実績</div>
     </div>
     <div>
       <div className="text-4xl md:text-5xl font-bold mb-2">20以上</div>
-      <div className="text-lg">プロジェクト</div>
+      <div className="text-lg">年間プロジェクト</div>
     </div>
     <div>
       <div className="text-4xl md:text-5xl font-bold mb-2">99%</div>
