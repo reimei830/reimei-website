@@ -1,29 +1,76 @@
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import './globals.css'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://reimei.tech'),
-  title: '株式会社黎明 | Reimei Inc. - 製造業向け自動化設備の電気設計施工',
-  description: 'PLC設計と協働ロボット統合による製造業向け自動化設備を提供。トヨタ自動車、三菱自動車、スズキ自動車、川崎重工業への導入実績。',
-  keywords: 'PLC設計,協働ロボット,FAIRINO,自動化設備,電気設計,三菱電機,KEYENCE,TOYOPUC,製造業,名古屋',
+  title: {
+    default: '株式会社黎明 | PLC設計・協働ロボット統合 | 愛知県名古屋市',
+    template: '%s | 株式会社黎明'
+  },
+  description: '製造業向け自動化設備の電気設計施工。PLC設計と協働ロボット統合で生産性向上を実現。トヨタ自動車、三菱自動車など大手企業への導入実績多数。愛知県名古屋市を拠点に全国対応。',
+  keywords: [
+    'PLC設計',
+    '協働ロボット',
+    '自動化設備',
+    '電気設計',
+    'FAIRINO',
+    'WAGO',
+    '三菱電機',
+    'KEYENCE',
+    '名古屋',
+    '製造業',
+    'ロボット統合',
+    '生産自動化',
+    '制御システム',
+    '愛知県'
+  ],
+  authors: [{ name: '株式会社黎明' }],
+  creator: '株式会社黎明',
+  publisher: '株式会社黎明',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
-    title: '株式会社黎明 | Reimei Inc.',
-    description: 'PLC設計と協働ロボット統合による製造業向け自動化設備を提供',
+    type: 'website',
+    locale: 'ja_JP',
     url: 'https://reimei.tech',
     siteName: '株式会社黎明',
+    title: '株式会社黎明 | PLC設計・協働ロボット統合',
+    description: '製造業向け自動化設備の電気設計施工。PLC設計と協働ロボット統合で生産性向上を実現。',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
+        alt: '株式会社黎明 - 製造業向け自動化設備',
       },
     ],
-    locale: 'ja_JP',
-    type: 'website',
   },
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+  twitter: {
+    card: 'summary_large_image',
+    title: '株式会社黎明 | PLC設計・協働ロボット統合',
+    description: '製造業向け自動化設備の電気設計施工。PLC設計と協働ロボット統合で生産性向上を実現。',
+    images: ['/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    // Google Search Console用（後で追加可能）
+    // google: 'your-google-verification-code',
   },
 }
 
@@ -33,8 +80,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ja" className="scroll-smooth">
-      <body className="antialiased">{children}</body>
+    <html lang="ja">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
+      <body className={inter.className}>{children}</body>
     </html>
   )
 }
