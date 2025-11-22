@@ -68,6 +68,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    google: 'HVAloi2T9yBPlsNuv4HDVcntaln9fw-OoFpGxB8nRtE',
+  },
 }
 
 export default function RootLayout({
@@ -101,7 +104,6 @@ export default function RootLayout({
     <html lang="ja">
       <head>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="google-site-verification" content="HVAloi2T9yBPlsNuv4HDVcntaln9fw-OoFpGxB8nRtE" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
