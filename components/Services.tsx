@@ -130,6 +130,7 @@ export default function Services() {
                         <span className="bg-reimei-green text-white px-3 py-1 rounded-full text-sm hover:scale-110 transition-transform duration-200">FANUC</span>
                         <span className="bg-reimei-green text-white px-3 py-1 rounded-full text-sm hover:scale-110 transition-transform duration-200">NACHI</span>
                         <span className="bg-reimei-green text-white px-3 py-1 rounded-full text-sm hover:scale-110 transition-transform duration-200">Kawasaki</span>
+			<span className="bg-reimei-green text-white px-3 py-1 rounded-full text-sm hover:scale-110 transition-transform duration-200">YASUKAWA</span>
                       </div>
                     </div>
                   </div>
