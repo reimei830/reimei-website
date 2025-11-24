@@ -128,7 +128,7 @@ export default function Services() {
                       <p className="text-sm font-semibold text-gray-700 mt-3">産業用ロボット</p>
                       <div className="flex flex-wrap gap-2 mt-1">
                         <span className="bg-reimei-green text-white px-3 py-1 rounded-full text-sm hover:scale-110 transition-transform duration-200">FANUC</span>
-                        <span className="bg-reimei-green text-white px-3 py-1 rounded-full text-sm hover:scale-110 transition-transform duration-200">ナチ</span>
+                        <span className="bg-reimei-green text-white px-3 py-1 rounded-full text-sm hover:scale-110 transition-transform duration-200">NACHI</span>
                         <span className="bg-reimei-green text-white px-3 py-1 rounded-full text-sm hover:scale-110 transition-transform duration-200">Kawasaki</span>
                       </div>
                     </div>

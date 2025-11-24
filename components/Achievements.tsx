@@ -45,9 +45,9 @@ export default function Achievements() {
             <div className="grid md:grid-cols-3 gap-8 text-center">
               <div className="transform hover:scale-110 transition-transform duration-300">
                 <div className="text-4xl md:text-5xl font-bold mb-2">
-                  <CountUp end={5} duration={2} suffix="+" />
+                  <CountUp end={6} duration={2} suffix="+" />
                 </div>
-                <div className="text-lg font-semibold">年間の実績</div>
+                <div className="text-lg font-semibold">創業年数</div>
               </div>
               <div className="transform hover:scale-110 transition-transform duration-300">
                 <div className="text-4xl md:text-5xl font-bold mb-2">
