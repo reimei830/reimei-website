@@ -10,21 +10,42 @@ export default function Contact() {
     phone: '',
     message: '',
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
-    // メールクライアントを開く
-    const subject = encodeURIComponent('お問い合わせ')
-    const body = encodeURIComponent(
-      `会社名: ${formData.company}\n` +
-      `お名前: ${formData.name}\n` +
-      `メールアドレス: ${formData.email}\n` +
-      `電話番号: ${formData.phone}\n\n` +
-      `お問い合わせ内容:\n${formData.message}`
-    )
-    
-    window.location.href = `mailto:r.horiuchi@reimei-inc.com?subject=${subject}&body=${body}`
+    setIsSubmitting(true)
+    setError('')
+
+    const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdODVIxWGG7EZCNGArt1RyWdyYLkFwjpSJ2uqvax_BRrDE-BA/formResponse'
+
+    const formBody = new URLSearchParams({
+      'entry.671155879': formData.company,
+      'entry.2070172825': formData.name,
+      'entry.363465358': formData.email,
+      'entry.1589760849': formData.phone,
+      'entry.1808589645': formData.message,
+    })
+
+    try {
+      await fetch(GOOGLE_FORM_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formBody.toString(),
+      })
+
+      setIsSubmitted(true)
+      setFormData({ name: '', company: '', email: '', phone: '', message: '' })
+    } catch {
+      setError('送信に失敗しました。しばらく経ってから再度お試しください。')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -45,7 +66,28 @@ export default function Contact() {
         </div>
 
         <div className="max-w-3xl mx-auto">
+          {isSubmitted ? (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-8 md:p-12 text-center">
+              <div className="text-green-500 text-6xl mb-4">✓</div>
+              <h3 className="text-2xl font-bold text-green-800 mb-4">送信完了</h3>
+              <p className="text-green-700 mb-6">
+                お問い合わせありがとうございます。<br />
+                内容を確認次第、担当者よりご連絡いたします。
+              </p>
+              <button
+                onClick={() => setIsSubmitted(false)}
+                className="text-reimei-blue hover:underline"
+              >
+                新しいお問い合わせを送信する
+              </button>
+            </div>
+          ) : (
           <div className="bg-gray-50 rounded-lg p-8 md:p-12">
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md mb-6">
+                {error}
+              </div>
+            )}
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
@@ -127,13 +169,15 @@ export default function Contact() {
               <div className="text-center">
                 <button
                   type="submit"
-                  className="bg-reimei-blue text-white px-12 py-4 rounded-md font-bold text-lg hover:bg-reimei-light-blue transition-colors shadow-lg"
+                  disabled={isSubmitting}
+                  className="bg-reimei-blue text-white px-12 py-4 rounded-md font-bold text-lg hover:bg-reimei-light-blue transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  送信する
+                  {isSubmitting ? '送信中...' : '送信する'}
                 </button>
               </div>
             </form>
           </div>
+          )}
 
           <div className="mt-8 grid md:grid-cols-3 gap-6 text-center">
             <div className="bg-gray-50 p-6 rounded-lg">
