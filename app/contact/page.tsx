@@ -15,28 +15,29 @@ export default function ContactPage() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
-  setStatus('submitting')
-  
-  try {
-    const response = await fetch('https://formspree.io/f/manayzwq', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        company: formData.company,
-        email: formData.email,
-        _replyto: formData.email, // ← これを追加
-        phone: formData.phone,
-        message: formData.message,
-      }),
+    e.preventDefault()
+    setStatus('submitting')
+
+    const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdODVIxWGG7EZCNGArt1RyWdyYLkFwjpSJ2uqvax_BRrDE-BA/formResponse'
+
+    const formBody = new URLSearchParams({
+      'entry.671155879': formData.company,
+      'entry.2070172825': formData.name,
+      'entry.363465358': formData.email,
+      'entry.1589760849': formData.phone,
+      'entry.1808589645': formData.message,
     })
-    
-    const data = await response.json() // ← これを追加（エラー詳細取得）
-    
-    if (response.ok) {
+
+    try {
+      await fetch(GOOGLE_FORM_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formBody.toString(),
+      })
+
       setStatus('success')
       setFormData({
         name: '',
@@ -45,15 +46,11 @@ export default function ContactPage() {
         phone: '',
         message: '',
       })
-    } else {
-      console.error('FormSpree error:', data) // ← エラー詳細を表示
+    } catch (error) {
+      console.error('Request error:', error)
       setStatus('error')
     }
-  } catch (error) {
-    console.error('Request error:', error)
-    setStatus('error')
   }
-}
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
