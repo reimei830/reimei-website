@@ -62,29 +62,29 @@ export default function ContactPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-gray-50">
+      <main className="min-h-screen bg-dark-bg">
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h1 className="text-4xl font-bold text-reimei-blue mb-4">お問い合わせ</h1>
-              <p className="text-xl text-gray-600">
+              <h1 className="text-4xl font-bold text-white mb-4">お問い合わせ</h1>
+              <p className="text-xl text-gray-400">
                 自動化設備に関するご相談は、お気軽にお問い合わせください
               </p>
             </div>
 
             <div className="max-w-3xl mx-auto">
-              <div className="bg-white rounded-lg p-8 md:p-12 shadow-lg">
+              <div className="glass-card p-8 md:p-12">
                 {status === 'success' ? (
                   <div className="text-center py-12">
-                    <div className="text-green-600 text-6xl mb-4">✓</div>
-                    <h2 className="text-2xl font-bold text-gray-800 mb-4">送信完了</h2>
-                    <p className="text-gray-600 mb-8">
+                    <div className="text-green-400 text-6xl mb-4">✓</div>
+                    <h2 className="text-2xl font-bold text-white mb-4">送信完了</h2>
+                    <p className="text-gray-300 mb-8">
                       お問い合わせありがとうございます。<br />
                       担当者より折り返しご連絡いたします。
                     </p>
                     <button
                       onClick={() => setStatus('idle')}
-                      className="text-reimei-blue hover:underline"
+                      className="text-neon-blue hover:text-blue-400 transition-colors"
                     >
                       別のお問い合わせを送る
                     </button>
@@ -93,7 +93,7 @@ export default function ContactPage() {
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label htmlFor="company" className="block text-sm font-bold text-gray-700 mb-2">
+                        <label htmlFor="company" className="block text-sm font-bold text-gray-300 mb-2">
                           会社名 <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -103,11 +103,11 @@ export default function ContactPage() {
                           required
                           value={formData.company}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-reimei-blue focus:border-transparent"
+                          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-md text-white placeholder-gray-500 focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/20 focus:outline-none"
                         />
                       </div>
                       <div>
-                        <label htmlFor="name" className="block text-sm font-bold text-gray-700 mb-2">
+                        <label htmlFor="name" className="block text-sm font-bold text-gray-300 mb-2">
                           お名前 <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -117,14 +117,14 @@ export default function ContactPage() {
                           required
                           value={formData.name}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-reimei-blue focus:border-transparent"
+                          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-md text-white placeholder-gray-500 focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/20 focus:outline-none"
                         />
                       </div>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-2">
+                        <label htmlFor="email" className="block text-sm font-bold text-gray-300 mb-2">
                           メールアドレス <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -134,11 +134,11 @@ export default function ContactPage() {
                           required
                           value={formData.email}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-reimei-blue focus:border-transparent"
+                          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-md text-white placeholder-gray-500 focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/20 focus:outline-none"
                         />
                       </div>
                       <div>
-                        <label htmlFor="phone" className="block text-sm font-bold text-gray-700 mb-2">
+                        <label htmlFor="phone" className="block text-sm font-bold text-gray-300 mb-2">
                           電話番号
                         </label>
                         <input
@@ -147,13 +147,13 @@ export default function ContactPage() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-reimei-blue focus:border-transparent"
+                          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-md text-white placeholder-gray-500 focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/20 focus:outline-none"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label htmlFor="message" className="block text-sm font-bold text-gray-700 mb-2">
+                      <label htmlFor="message" className="block text-sm font-bold text-gray-300 mb-2">
                         お問い合わせ内容 <span className="text-red-500">*</span>
                       </label>
                       <textarea
@@ -163,13 +163,13 @@ export default function ContactPage() {
                         rows={6}
                         value={formData.message}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-reimei-blue focus:border-transparent"
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-md text-white placeholder-gray-500 focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/20 focus:outline-none"
                         placeholder="ご相談内容をご記入ください"
                       />
                     </div>
 
                     {status === 'error' && (
-                      <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+                      <div className="bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded">
                         送信に失敗しました。もう一度お試しください。
                       </div>
                     )}
@@ -178,7 +178,7 @@ export default function ContactPage() {
                       <button
                         type="submit"
                         disabled={status === 'submitting'}
-                        className="bg-reimei-blue text-white px-12 py-4 rounded-md font-bold text-lg hover:bg-reimei-light-blue transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="bg-gradient-to-r from-neon-blue to-blue-500 text-white px-12 py-4 rounded-md font-bold text-lg shadow-neon hover:shadow-neon-strong transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {status === 'submitting' ? '送信中...' : '送信する'}
                       </button>
@@ -188,21 +188,21 @@ export default function ContactPage() {
               </div>
 
               <div className="mt-8 grid md:grid-cols-2 gap-6 text-center">
-                <div className="bg-white p-6 rounded-lg shadow">
-                  <svg className="w-12 h-12 text-reimei-blue mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="glass-card p-6">
+                  <svg className="w-12 h-12 text-neon-blue mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  <h3 className="font-bold text-gray-800 mb-2">電話</h3>
-                  <a href="tel:0528936763" className="text-reimei-blue hover:underline">
+                  <h3 className="font-bold text-white mb-2">電話</h3>
+                  <a href="tel:0528936763" className="text-neon-blue hover:text-blue-400 transition-colors">
                     052-893-6763
                   </a>
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow">
-                  <svg className="w-12 h-12 text-reimei-blue mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="glass-card p-6">
+                  <svg className="w-12 h-12 text-neon-blue mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <h3 className="font-bold text-gray-800 mb-2">営業時間</h3>
-                  <p className="text-gray-600">9:00〜18:00</p>
+                  <h3 className="font-bold text-white mb-2">営業時間</h3>
+                  <p className="text-gray-400">9:00〜18:00</p>
                 </div>
               </div>
             </div>
