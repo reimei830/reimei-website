@@ -202,13 +202,23 @@ export default function DomainEmailGuidePage() {
             </p>
           </section>
 
-          <div className="mt-10">
-            <Link
-              href="/columns"
-              className="text-neon-blue hover:text-white transition-colors duration-200"
-            >
-              ← コラム一覧へ戻る
-            </Link>
+          <div className="mt-10 space-y-2">
+            <p>
+              <Link
+                href="/columns/kigyo-junbi-matome"
+                className="text-neon-blue hover:text-white transition-colors duration-200"
+              >
+                起業準備の全体像はこちら: 一人法人の起業準備まとめ →
+              </Link>
+            </p>
+            <p>
+              <Link
+                href="/columns"
+                className="text-neon-blue hover:text-white transition-colors duration-200"
+              >
+                ← コラム一覧へ戻る
+              </Link>
+            </p>
           </div>
         </article>
       </main>
