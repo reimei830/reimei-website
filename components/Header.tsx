@@ -18,6 +18,7 @@ export default function Header() {
     { href: '/#services', label: '事業内容' },
     { href: '/#achievements', label: '実績' },
     { href: '/#company', label: '会社概要' },
+    { href: '/columns', label: 'コラム' },
   ]
 
   return (
