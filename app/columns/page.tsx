@@ -14,6 +14,34 @@ export const metadata: Metadata = {
 
 const ARTICLES = [
   {
+    href: '/columns/kigyo-junbi-matome',
+    title: '一人法人の起業準備まとめ — 設立から会計まで7ステップ【2026年版】',
+    description:
+      '法人化の判断、会社設立、設立後の届出、法人口座、ドメイン・メール、会計ソフトまで。一人起業の準備を時系列に整理した完全ガイドです。',
+    date: '2026年7月22日',
+  },
+  {
+    href: '/columns/houjin-setsuritsu-guide',
+    title: '一人で法人を設立するには?株式会社・合同会社の違いと設立手順【2026年版】',
+    description:
+      '個人事業主のままか法人化するかの判断基準、株式会社と合同会社の費用・特徴の違い、設立の5ステップを解説します。',
+    date: '2026年7月22日',
+  },
+  {
+    href: '/columns/setsuritsugo-tetsuduki',
+    title: '法人設立後にやる手続きチェックリスト — 税務署・年金事務所・自治体への届出【2026年版】',
+    description:
+      '法人設立届出書・青色申告承認申請・社会保険の新規適用など、期限つきの届出をチェックリスト形式で整理しました。',
+    date: '2026年7月22日',
+  },
+  {
+    href: '/columns/houjin-kouza-guide',
+    title: '一人法人の法人口座はどこで開く?ネット銀行の比較と審査対策【2026年版】',
+    description:
+      'ネット銀行・メガバンク・信用金庫の比較と、法人口座の審査で見られるポイント・対策を解説します。',
+    date: '2026年7月22日',
+  },
+  {
     href: '/columns/domain-email-guide',
     title: '起業したら独自ドメインとメールを整備しよう — 選び方と取得手順【2026年版】',
     description:

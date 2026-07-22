@@ -19,6 +19,30 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://reimei.tech/columns/kigyo-junbi-matome</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://reimei.tech/columns/houjin-setsuritsu-guide</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://reimei.tech/columns/setsuritsugo-tetsuduki</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://reimei.tech/columns/houjin-kouza-guide</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://reimei.tech/columns/domain-email-guide</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>monthly</changefreq>
