@@ -14,6 +14,13 @@ export const metadata: Metadata = {
 
 const ARTICLES = [
   {
+    href: '/columns/domain-email-guide',
+    title: '起業したら独自ドメインとメールを整備しよう — 選び方と取得手順【2026年版】',
+    description:
+      '.co.jp / .jp / .comの選び方と費用の目安、取得の手順、独自ドメインメールの作り方を一人法人・個人事業主向けに解説します。',
+    date: '2026年7月22日',
+  },
+  {
     href: '/columns/kakutei-shinkoku-soft-hikaku',
     title: '個人事業主の確定申告ソフトはどれを選ぶ?やよい・マネーフォワード・freeeを比較【2026年版】',
     description:
