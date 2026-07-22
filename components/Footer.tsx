@@ -26,6 +26,7 @@ export default function Footer() {
                 { href: '/#company', label: '会社概要' },
                 { href: '/columns', label: 'コラム' },
                 { href: '/contact', label: 'お問い合わせ' },
+                { href: '/privacy', label: 'プライバシーポリシー' },
               ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-gray-500 hover:text-neon-blue transition-colors duration-200">
