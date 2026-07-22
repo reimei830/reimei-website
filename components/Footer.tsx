@@ -24,6 +24,7 @@ export default function Footer() {
                 { href: '/#services', label: '事業内容' },
                 { href: '/#achievements', label: '実績' },
                 { href: '/#company', label: '会社概要' },
+                { href: '/columns', label: 'コラム' },
                 { href: '/contact', label: 'お問い合わせ' },
               ].map((link) => (
                 <li key={link.href}>
