@@ -185,6 +185,22 @@ export default function KaikeiSoftHikakuPage() {
             </p>
           </section>
 
+          <section className="glass-card p-6 sm:p-8 mb-12">
+            <h2 className="text-xl font-bold text-white mb-4">
+              個人事業主・フリーランスの方へ
+            </h2>
+            <p className="text-gray-300 leading-relaxed mb-4">
+              まだ法人化していない個人事業主の方は、確定申告ソフトの比較記事をご覧ください。
+              無料で始められるソフトも紹介しています。
+            </p>
+            <Link
+              href="/columns/kakutei-shinkoku-soft-hikaku"
+              className="text-neon-blue hover:text-white transition-colors duration-200"
+            >
+              個人事業主の確定申告ソフトはどれを選ぶ?やよい・マネーフォワード・freeeを比較【2026年版】 →
+            </Link>
+          </section>
+
           <section className="text-xs text-gray-500 leading-relaxed border-t border-white/10 pt-6">
             <p className="mb-2">
               免責事項: 本記事は一般的な情報提供を目的としたものであり、税務・会計に関する専門的アドバイスではありません。
