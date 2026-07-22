@@ -14,6 +14,13 @@ export const metadata: Metadata = {
 
 const ARTICLES = [
   {
+    href: '/columns/kakutei-shinkoku-soft-hikaku',
+    title: '個人事業主の確定申告ソフトはどれを選ぶ?やよい・マネーフォワード・freeeを比較【2026年版】',
+    description:
+      '無料で始められるソフト、青色申告65万円控除への対応、自動仕訳の強さから、個人事業主・フリーランスに合う確定申告ソフトの選び方を解説します。',
+    date: '2026年7月22日',
+  },
+  {
     href: '/columns/kaikei-soft-hikaku',
     title: '一人法人の会計ソフトはどれを選ぶ?freee・マネーフォワード・弥生を比較【2026年版】',
     description:
