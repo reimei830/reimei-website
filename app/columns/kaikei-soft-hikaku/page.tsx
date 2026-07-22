@@ -6,7 +6,7 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   title: '一人法人の会計ソフト比較2026 | freee・マネーフォワード・弥生',
   description:
-    '一人法人・マイクロ法人向けにfreee会計・マネーフォワード クラウド会計・弥生会計オンラインを比較。インボイス制度・電子帳簿保存法への対応、料金、簿記知識の要否から自社に合う会計ソフトの選び方を解説します。',
+    '一人法人・マイクロ法人向けにfreee会計・マネーフォワード クラウド会計・弥生会計 Nextを比較。インボイス制度・電子帳簿保存法への対応、料金、簿記知識の要否から自社に合う会計ソフトの選び方を解説します。',
   alternates: {
     canonical: '/columns/kaikei-soft-hikaku',
   },
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
 }
 
 /*
- * A8.net承認後の差し替えメモ:
- * 下記の SOFTWARES 内 officialUrl をA8の広告リンクに差し替え、
- * rel="sponsored nofollow" を維持すること。PR表記は冒頭に設置済み。
+ * link.pixel があるものはA8.netアフィリエイトリンク設置済み。
+ * リンク文言(link.label)はA8素材の規定どおり改変しないこと。
+ * freee・マネーフォワードはA8承認後に link を差し替える。PR表記は冒頭に設置済み。
  */
 const SOFTWARES = [
   {
@@ -34,7 +34,11 @@ const SOFTWARES = [
       '人事労務(給与計算・社会保険)への拡張が同一プラットフォームで完結',
     ],
     caution: '従来の簿記の流儀(仕訳帳ベース)に慣れた人には独特の操作感',
-    officialUrl: 'https://www.freee.co.jp/accounting/',
+    link: {
+      href: 'https://www.freee.co.jp/accounting/',
+      label: 'freee会計 公式サイトで詳細を見る',
+      rel: 'nofollow noopener',
+    },
   },
   {
     name: 'マネーフォワード クラウド会計',
@@ -46,19 +50,28 @@ const SOFTWARES = [
       '金融機関との連携数が多く、明細の自動取得が幅広い',
     ],
     caution: '機能が多いぶん、最初の設定項目はやや多め',
-    officialUrl: 'https://biz.moneyforward.com/accounting/',
+    link: {
+      href: 'https://biz.moneyforward.com/accounting/',
+      label: 'マネーフォワード クラウド会計 公式サイトで詳細を見る',
+      rel: 'nofollow noopener',
+    },
   },
   {
-    name: '弥生会計オンライン',
-    price: '年額30,000円前後(セルフプラン。初年度無料キャンペーンが定番)',
-    knowledge: '簿記知識があれば最も低コストで運用可能',
+    name: '弥生会計 Next',
+    price: '月額2,000〜3,000円程度(プラン・キャンペーンにより変動)',
+    knowledge: '簿記知識があるとスムーズ。新世代UIで初心者にも配慮',
     strengths: [
-      '老舗ならではの安定した機能とサポート体制',
-      '初年度無料キャンペーンによりランニングコストを抑えやすい',
+      '老舗・弥生の新世代クラウド会計。銀行明細やレシートの自動取込に対応',
+      '「弥生給与 Next」など同シリーズ製品との連携でバックオフィスを揃えやすい',
       '全国の税理士事務所での採用実績が多く、顧問契約時の互換性が高い',
     ],
-    caution: 'クラウド版はデスクトップ版に比べ機能が絞られている',
-    officialUrl: 'https://www.yayoi-kk.co.jp/products/account-ol/',
+    caution: '比較的新しい製品のため、従来のデスクトップ版弥生会計とは操作感が異なる',
+    link: {
+      href: 'https://px.a8.net/svt/ejp?a8mat=4B86GY+CKHGJ6+35XE+6IP2Q',
+      label: '法人向けクラウド会計ソフト「弥生会計 Next」はこちら',
+      rel: 'nofollow sponsored noopener',
+      pixel: 'https://www16.a8.net/0.gif?a8mat=4B86GY+CKHGJ6+35XE+6IP2Q',
+    },
   },
 ]
 
@@ -104,7 +117,7 @@ export default function KaikeiSoftHikakuPage() {
             </p>
             <p>
               本記事では、一人法人での利用を前提に、国内シェア上位の
-              「freee会計」「マネーフォワード クラウド会計」「弥生会計オンライン」の3つを比較します。
+              「freee会計」「マネーフォワード クラウド会計」「弥生会計 Next」の3つを比較します。
             </p>
           </section>
 
@@ -143,14 +156,19 @@ export default function KaikeiSoftHikakuPage() {
                 ))}
               </ul>
               <p className="text-gray-400 text-sm mb-6">注意点: {s.caution}</p>
-              <a
-                href={s.officialUrl}
-                target="_blank"
-                rel="sponsored nofollow noopener"
-                className="inline-block px-6 py-3 rounded-lg bg-neon-blue/10 border border-neon-blue/40 text-neon-blue hover:bg-neon-blue/20 transition-colors duration-200"
-              >
-                {s.name} 公式サイトで詳細を見る
-              </a>
+              <p>
+                <a
+                  href={s.link.href}
+                  target="_blank"
+                  rel={s.link.rel}
+                  className="inline-block px-6 py-3 rounded-lg bg-neon-blue/10 border border-neon-blue/40 text-neon-blue hover:bg-neon-blue/20 transition-colors duration-200"
+                >
+                  {s.link.label}
+                </a>
+                {'pixel' in s.link && (
+                  <img style={{ border: 0 }} width={1} height={1} src={s.link.pixel} alt="" />
+                )}
+              </p>
             </section>
           ))}
 
@@ -165,12 +183,39 @@ export default function KaikeiSoftHikakuPage() {
               なら マネーフォワード クラウド会計。従来の会計の流儀のまま、自動化の恩恵を受けられます。
             </p>
             <p>
-              <span className="text-white font-medium">とにかくコストを抑えたい・簿記3級程度の知識がある</span>
-              なら 弥生会計オンライン。初年度無料キャンペーンを活用すれば、導入コストはほぼゼロです。
+              <span className="text-white font-medium">コストを抑えたい・税理士との互換性を重視したい</span>
+              なら 弥生会計 Next。キャンペーンを活用すれば導入コストを抑えやすく、税理士事務所での弥生シリーズ採用実績の多さも安心材料です。
             </p>
             <p>
               いずれを選んでも、銀行口座・クレジットカードを法人名義で分離し、連携設定を最初に済ませることが
               自動化の効果を最大にするコツです。
+            </p>
+          </section>
+
+          <section className="glass-card p-6 sm:p-8 mb-12">
+            <h2 className="text-xl font-bold text-white mb-4">従業員を雇ったら: 給与計算ソフトも検討を</h2>
+            <p className="text-gray-300 leading-relaxed mb-4">
+              一人法人でも従業員を雇うと、毎月の給与計算・社会保険料の計算・年末調整が定常業務になります。
+              手計算やExcelでの運用は保険料率の改定のたびに更新が必要でミスも起きやすいため、
+              給与計算ソフトの導入がおすすめです。会計ソフトと同じシリーズで揃えると、
+              仕訳連携までスムーズです。
+            </p>
+            <p>
+              <a
+                href="https://px.a8.net/svt/ejp?a8mat=4B86GY+CKHGJ6+35XE+6G4HE"
+                target="_blank"
+                rel="nofollow sponsored noopener"
+                className="inline-block px-6 py-3 rounded-lg bg-neon-blue/10 border border-neon-blue/40 text-neon-blue hover:bg-neon-blue/20 transition-colors duration-200"
+              >
+                弥生給与 Nextはこちら
+              </a>
+              <img
+                style={{ border: 0 }}
+                width={1}
+                height={1}
+                src="https://www18.a8.net/0.gif?a8mat=4B86GY+CKHGJ6+35XE+6G4HE"
+                alt=""
+              />
             </p>
           </section>
 
