@@ -162,11 +162,17 @@ export default function HoujinSetsuritsuGuidePage() {
             <h2 className="text-xl font-bold text-white mb-4">
               法人化の損益分岐は「実際の数字」で確認を
             </h2>
-            <p className="text-gray-300 leading-relaxed">
+            <p className="text-gray-300 leading-relaxed mb-4">
               当社では、売上・経費・役員報酬を入力するだけで法人税等・消費税・社会保険料・手取り額を
-              その場で試算できる「法人税シミュレーター2026」を開発しています。
+              その場で試算できる「法人税シミュレーター2026」を無料公開しています。
               個人事業主のままの場合と法人化した場合の手取りを比べてから決めるのが失敗しないコツです。
             </p>
+            <a
+              href="/taxsim"
+              className="inline-block px-6 py-3 rounded-lg bg-neon-blue/10 border border-neon-blue/40 text-neon-blue hover:bg-neon-blue/20 transition-colors duration-200"
+            >
+              法人税シミュレーター2026を使ってみる(無料)
+            </a>
           </section>
 
           <section className="text-xs text-gray-500 leading-relaxed border-t border-white/10 pt-6">

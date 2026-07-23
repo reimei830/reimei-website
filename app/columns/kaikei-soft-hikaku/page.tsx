@@ -223,11 +223,17 @@ export default function KaikeiSoftHikakuPage() {
             <h2 className="text-xl font-bold text-white mb-4">
               あわせて読みたい: 法人税・手取りのシミュレーション
             </h2>
-            <p className="text-gray-300 leading-relaxed">
+            <p className="text-gray-300 leading-relaxed mb-4">
               当社では、売上・経費・役員報酬を入力するだけで法人税等・消費税・社会保険料・手取り額を
-              その場で試算できる「法人税シミュレーター2026」を開発しています。
+              その場で試算できる「法人税シミュレーター2026」を無料公開しています。
               会計ソフトで日々の記帳を自動化しつつ、税負担の全体像はシミュレーターで把握するのがおすすめです。
             </p>
+            <a
+              href="/taxsim"
+              className="inline-block px-6 py-3 rounded-lg bg-neon-blue/10 border border-neon-blue/40 text-neon-blue hover:bg-neon-blue/20 transition-colors duration-200"
+            >
+              法人税シミュレーター2026を使ってみる(無料)
+            </a>
           </section>
 
           <section className="glass-card p-6 sm:p-8 mb-12">

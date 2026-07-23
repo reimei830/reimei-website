@@ -135,12 +135,18 @@ export default function KigyoJunbiMatomePage() {
 
           <section className="glass-card p-6 sm:p-8 mb-12">
             <h2 className="text-xl font-bold text-white mb-4">迷ったら数字で決める</h2>
-            <p className="text-gray-300 leading-relaxed">
+            <p className="text-gray-300 leading-relaxed mb-4">
               起業準備で一番大きな分かれ道はステップ1の「法人化するかどうか」です。
               当社では、売上・経費・役員報酬を入力するだけで法人税等・消費税・社会保険料・手取り額を
-              その場で試算できる「法人税シミュレーター2026」を開発しています。
+              その場で試算できる「法人税シミュレーター2026」を無料公開しています。
               感覚ではなく実際の数字で比較してから決めましょう。
             </p>
+            <a
+              href="/taxsim"
+              className="inline-block px-6 py-3 rounded-lg bg-neon-blue/10 border border-neon-blue/40 text-neon-blue hover:bg-neon-blue/20 transition-colors duration-200"
+            >
+              法人税シミュレーター2026を使ってみる(無料)
+            </a>
           </section>
 
           <section className="text-xs text-gray-500 leading-relaxed border-t border-white/10 pt-6">
