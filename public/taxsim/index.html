@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<base href="/taxsim/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>法人税シミュレーター2026</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+:root{
+  /* iOS システムカラー(ライト) */
+  --tint:#007aff; --label:#000; --label2:rgba(60,60,67,.6); --label3:rgba(60,60,67,.3);
+  --bg:#f2f2f7; --card:#ffffff; --fill:#e5e5ea; --fill2:#f2f2f7;
+  --sep:rgba(60,60,67,.29);
+  --green:#34c759; --red:#ff3b30; --orange:#ff9500; --yellow:#e8b800;
+  --purple:#af52de; --pink:#ff2d55; --indigo:#5856d6; --gray:#8e8e93; --brown:#a2845e;
+  /* 旧トークン互換エイリアス(JS/インラインstyleが参照) */
+  --md-primary:var(--tint); --md-on-surface-variant:var(--label2);
+  --md-error:var(--red); --md-outline-variant:var(--sep);
+  --c-expense:var(--gray); --c-shaho:var(--yellow); --c-corp:var(--orange);
+  --c-vat:var(--purple); --c-person:var(--pink); --c-tedori:var(--tint);
+  --c-naibu:var(--green); --c-kyosai:var(--indigo); --c-staff:var(--brown);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --tint:#0a84ff; --label:#fff; --label2:rgba(235,235,245,.6); --label3:rgba(235,235,245,.3);
+    --bg:#000; --card:#1c1c1e; --fill:#2c2c2e; --fill2:#2c2c2e;
+    --sep:rgba(84,84,88,.6);
+    --green:#30d158; --red:#ff453a; --orange:#ff9f0a; --yellow:#ffd60a;
+    --purple:#bf5af2; --pink:#ff375f; --indigo:#5e5ce6; --gray:#8e8e93; --brown:#ac8e68;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto 0;height:280px;pointer-events:none;z-index:-1;
+  background:radial-gradient(120% 100% at 50% 0%,color-mix(in srgb,var(--tint) 9%,transparent),transparent 70%)}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Sans","Noto Sans JP",sans-serif;
+  background:var(--bg); color:var(--label);
+  font-size:17px; line-height:22px;
+  padding:0 0 calc(96px + env(safe-area-inset-bottom));
+  padding-top:env(safe-area-inset-top);
+}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+header{padding:24px 0 4px}
+header h1{font-size:clamp(19px,7.2vw,34px);line-height:1.2;font-weight:700;
+  letter-spacing:.2px;white-space:nowrap}
+header .sub{color:var(--label2);font-size:13px;line-height:18px;margin-top:4px}
+.langbtn{display:inline-block;margin-top:8px;margin-left:6px;font-size:12px;line-height:16px;font-weight:600;color:var(--label2);background:var(--fill);border:none;padding:4px 12px;border-radius:9999px;cursor:pointer;font-family:inherit}
+.langbtn:active{opacity:.6}
+select.langbtn{-webkit-appearance:none;appearance:none;padding-right:14px}
+html[lang=ne] body,html[lang=hi] body{font-family:"Noto Sans Devanagari",-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif}
+header .badge{display:inline-block;margin-top:8px;font-size:12px;line-height:16px;font-weight:600;
+  color:var(--tint);background:color-mix(in srgb,var(--tint) 15%,transparent);
+  padding:4px 10px;border-radius:9999px}
+
+/* Inset Grouped カード */
+.card{background:var(--card);border-radius:16px;padding:16px;margin-top:24px;
+  box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05)}
+@media (prefers-color-scheme: dark){.card{box-shadow:none}}
+.card h2{font-size:13px;line-height:18px;font-weight:400;color:var(--label2);
+  text-transform:none;margin:-4px 0 10px;letter-spacing:.1px}
+.card h2 small{font-weight:400;font-size:12px;color:var(--label3);margin-left:6px}
+
+/* 入力行 */
+.field{margin-bottom:18px}
+.field:last-child{margin-bottom:4px}
+.field label{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  font-size:15px;line-height:20px;color:var(--label);margin-bottom:8px}
+.field .val{font-size:17px;font-weight:400;color:var(--label2);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.field .val input{
+  width:5.6em;background:var(--fill2);border:none;border-radius:8px;
+  color:var(--label);font:inherit;font-size:17px;text-align:right;
+  padding:5px 8px;font-variant-numeric:tabular-nums;-webkit-appearance:none}
+.field .val input:focus{outline:2px solid var(--tint);outline-offset:-1px}
+
+/* iOSスライダー */
+/* 左32pxはスクロール用の指スペース(スライダー誤操作防止) */
+input[type=range]{width:calc(100% - 32px);margin-left:32px;display:block;
+  appearance:none;-webkit-appearance:none;height:34px;background:transparent;cursor:pointer;touch-action:pan-x}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;
+  background:linear-gradient(to right,var(--tint) var(--p,50%),var(--fill) var(--p,50%))}
+input[type=range]::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:26px;height:26px;border-radius:50%;
+  background:#fff;margin-top:-11px;box-shadow:0 0.5px 4px rgba(0,0,0,.22),0 6px 13px rgba(0,0,0,.12)}
+input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:var(--fill)}
+input[type=range]::-moz-range-progress{height:4px;border-radius:2px;background:var(--tint)}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border:none;border-radius:50%;
+  background:#fff;box-shadow:0 0.5px 4px rgba(0,0,0,.22),0 6px 13px rgba(0,0,0,.12)}
+
+/* セグメンテッドコントロール(消費税方式) */
+.chips{display:flex;gap:0;background:var(--fill);border-radius:9px;padding:2px}
+.chip{flex:1;height:28px;padding:0 2px;border-radius:7px;border:none;
+  background:transparent;color:var(--label);font:inherit;font-size:12px;line-height:16px;
+  font-weight:500;cursor:pointer;transition:opacity .15s;white-space:nowrap}
+.chip:active{opacity:.6}
+.chip.on{background:var(--card);font-weight:600;
+  box-shadow:0 0.5px 2px rgba(0,0,0,.12),0 2px 6px rgba(0,0,0,.08)}
+@media (prefers-color-scheme: dark){.chip.on{background:#636366}}
+
+/* 都道府県セレクト */
+select.sel{width:100%;height:44px;background:var(--fill2);
+  border:none;border-radius:10px;color:var(--label);font:inherit;font-size:17px;
+  padding:0 36px 0 12px;-webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238e8e93' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center}
+select.sel:focus{outline:2px solid var(--tint);outline-offset:-1px}
+
+/* スイッチ(iOS) */
+.toggle-row{display:flex;justify-content:space-between;align-items:center;margin-top:14px;
+  min-height:44px;font-size:17px;color:var(--label)}
+.switch{position:relative;width:51px;height:31px;flex-shrink:0}
+.switch input{opacity:0;width:0;height:0}
+.switch .tr{position:absolute;inset:0;border-radius:16px;background:var(--fill);transition:.25s;cursor:pointer}
+.switch .tr::after{content:"";position:absolute;top:2px;left:2px;
+  width:27px;height:27px;border-radius:50%;background:#fff;transition:.25s;
+  box-shadow:0 1px 3px rgba(0,0,0,.25),0 3px 8px rgba(0,0,0,.12)}
+.switch input:checked + .tr{background:var(--green)}
+.switch input:checked + .tr::after{left:22px}
+
+/* ヒーロー */
+.hero{background:var(--card);border-radius:16px;padding:20px 16px;margin-top:24px;
+  box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05)}
+@media (prefers-color-scheme: dark){.hero{box-shadow:none}}
+.hero .lbl{font-size:13px;line-height:18px;color:var(--label2)}
+.hero .big{font-size:42px;line-height:50px;font-weight:800;
+  background:linear-gradient(135deg,var(--tint),#30b0c7);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  font-variant-numeric:tabular-nums;letter-spacing:.2px}
+.hero .big small{font-size:20px;font-weight:700;margin-left:3px}
+.hero .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.hero .kpi{background:var(--fill2);border-radius:10px;padding:10px 12px}
+.hero .kpi .k{font-size:12px;line-height:16px;color:var(--label2)}
+.hero .kpi .v{font-size:17px;line-height:22px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:2px}
+#warnRed{display:none;margin-top:12px;font-size:13px;line-height:18px;color:var(--red);
+  background:color-mix(in srgb,var(--red) 12%,transparent);
+  border-radius:10px;padding:10px 12px}
+
+/* フローバー */
+.flow{margin-top:18px}
+.flowbar{display:flex;gap:2px;height:30px;border-radius:8px;background:transparent}
+.flowbar div{transition:width .3s cubic-bezier(.25,.1,.25,1);min-width:3px;border-radius:4px}
+.seg-tedori{position:relative;z-index:1}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:12px;line-height:16px;
+  color:var(--label2)}
+.legend span{display:inline-flex;align-items:center;gap:5px;font-variant-numeric:tabular-nums}
+.legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
+
+/* リスト(明細) */
+table{width:100%;border-collapse:collapse}
+td{padding:11px 0;font-size:15px;line-height:20px;border-bottom:0.5px solid var(--sep)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--label2)}
+td.indent{padding-left:16px;color:var(--label2);font-size:13px}
+td.indent + td.num{font-size:13px}
+tr.total td{font-weight:600;border-bottom:none;padding-top:12px}
+tr.total td.num{color:var(--tint)}
+tr:last-child td{border-bottom:none}
+.note{font-size:13px;line-height:18px;color:var(--label2);margin-top:20px;padding:0 4px}
+.note li{margin-left:16px;margin-top:5px}
+
+/* 下部サマリーバー(regularマテリアル) */
+.sumbar{position:fixed;left:0;right:0;bottom:0;z-index:10;
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-top:0.5px solid var(--sep);
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+@media (prefers-color-scheme: dark){.sumbar{background:rgba(28,28,30,.72)}}
+.sumbar .inner{max-width:680px;margin:0 auto;display:flex;gap:8px}
+.sumbar .cell{flex:1;text-align:center}
+.sumbar .k{font-size:11px;line-height:13px;color:var(--label2)}
+.sumbar .v{font-size:16px;line-height:21px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:2px}
+.sumbar #sbTax{color:var(--pink)}
+.sumbar #sbTedori{color:var(--tint)}
+.sumbar #sbNaibu{color:var(--green)}
+@media(max-width:400px){.hero .big{font-size:34px;line-height:41px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>法人税シミュレーター2026</h1>
+  <div class="sub">一人法人(株式会社)/ 都道府県別に税金・社保・手取りを即算出</div>
+  <span class="badge">概算・令和8年度料率</span> <select id="langSel" class="langbtn"><option value="ja">日本語</option><option value="en">English</option><option value="zh-CN">简体中文</option><option value="zh-TW">繁體中文</option><option value="ko">한국어</option><option value="vi">Tiếng Việt</option><option value="tl">Tagalog</option><option value="ne">नेपाली</option><option value="hi">हिन्दी</option><option value="tr">Türkçe</option></select>
+</header>
+
+<!-- 入力 -->
+<section class="card">
+  <h2><span data-i18n>条件を入力</span><small data-i18n>金額は税抜・年額(万円)</small></h2>
+
+  <div class="field">
+    <label><span data-i18n>年間売上高</span><span class="val"><input id="iSales" type="number" min="0" step="10" value="6000"> <span data-i18n>万円</span></span></label>
+    <input id="sSales" type="range" min="0" max="100000" step="100" value="6000">
+  </div>
+
+  <div class="field">
+    <label><span data-i18n>経費(人件費・社保・税金を除く)</span><span class="val"><input id="iExp" type="number" min="0" step="10" value="4000"> <span data-i18n>万円</span></span></label>
+    <input id="sExp" type="range" min="0" max="100000" step="100" value="4000">
+  </div>
+
+  <div class="field">
+    <label><span data-i18n>従業員の人件費(給与・賞与の年額合計)</span><span class="val"><input id="iStaff" type="number" min="0" step="10" value="0"> <span data-i18n>万円</span></span></label>
+    <input id="sStaff" type="range" min="0" max="100000" step="100" value="0">
+  </div>
+
+  <div class="field">
+    <label><span data-i18n>役員報酬(定期同額・年額)</span><span class="val"><input id="iSal" type="number" min="0" step="12" value="960"> <span data-i18n>万円</span></span></label>
+    <input id="sSal" type="range" min="0" max="30000" step="60" value="960">
+  </div>
+
+  <div class="field">
+    <label><span data-i18n>役員賞与(事前確定届出・年1回)</span><span class="val"><input id="iBonus" type="number" min="0" step="10" value="200"> <span data-i18n>万円</span></span></label>
+    <input id="sBonus" type="range" min="0" max="30000" step="50" value="200">
+  </div>
+
+  <div class="field">
+    <label><span data-i18n>小規模企業共済 掛金(月額)</span><span class="val"><input id="iKyosai" type="number" min="0" max="70000" step="1000" value="0"> <span data-i18n>円</span></span></label>
+    <input id="sKyosai" type="range" min="0" max="70000" step="1000" value="0">
+  </div>
+
+  <div class="field">
+    <label style="margin-bottom:8px"><span data-i18n>都道府県(協会けんぽ支部・本店所在地)</span></label>
+    <select id="pref" class="sel"><option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option><option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option><option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option><option>岐阜県</option><option>静岡県</option><option selected>愛知県</option><option>三重県</option><option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option><option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option><option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option><option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option><option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option><option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option></select>
+  </div>
+
+  <div class="field" style="margin-bottom:8px">
+    <label style="margin-bottom:8px"><span data-i18n>消費税の課税方式</span></label>
+    <div class="chips" id="vatChips">
+      <button class="chip" data-v="menzei" data-i18n>免税</button>
+      <button class="chip" data-v="niwari" data-i18n>2割特例</button>
+      <button class="chip" data-v="kani" data-i18n>簡易課税(第5種)</button>
+      <button class="chip on" data-v="gensoku" data-i18n>原則課税</button>
+    </div>
+  </div>
+  <div class="field" id="ratioField">
+    <label><span data-i18n>経費のうち非課税仕入(給与・保険・税金等)</span><span class="val"><input id="iHikazei" type="number" min="0" step="10" value="300"> <span data-i18n>万円</span></span></label>
+    <input id="sHikazei" type="range" min="0" max="5000" step="10" value="300">
+  </div>
+
+  <div class="toggle-row">
+    <span data-i18n>介護保険(40歳以上)を含める</span>
+    <label class="switch"><input id="kaigo" type="checkbox" checked><span class="tr"></span></label>
+  </div>
+</section>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="lbl">税金+社会保険料の年間負担合計</div>
+  <div class="big"><span id="heroTotal">0</span><small id="heroUnit">万円</small></div>
+  <div class="grid">
+    <div class="kpi"><div class="k">実効負担率(対売上)</div><div class="v" id="kRate">–</div></div>
+    <div class="kpi"><div class="k">うち税金 / うち社保</div><div class="v" id="kSplit">–</div></div>
+    <div class="kpi"><div class="k">個人の手取り</div><div class="v" id="kTedori">–</div></div>
+    <div class="kpi"><div class="k">会社に残る利益(税引後)</div><div class="v" id="kNaibu">–</div></div>
+  </div>
+  <div id="warnRed">⚠ 法人所得が赤字です。法人税等は均等割のみ発生します。</div>
+
+  <div class="flow">
+    <div class="lbl" style="margin-bottom:8px">売上の行き先(税抜売上=100%)</div>
+    <div class="flowbar" id="flowbar"></div>
+    <div class="legend" id="legend"></div>
+  </div>
+</section>
+
+<!-- 会社に残る金額 -->
+<section class="card">
+  <h2>売上から会社に最後に残る金額</h2>
+  <table>
+    <tbody id="wfBody"></tbody>
+    <tr class="total"><td>会社に残る金額(税引後利益)</td><td class="num" id="wfFinal"></td></tr>
+  </table>
+  <div class="note" style="margin-top:10px">消費税は預り金として別途納付するため上の損益計算には含めていません(税抜経理前提)。残った利益は内部留保となり、将来の役員退職金原資(功績倍率法)などに活用できます。</div>
+</section>
+
+<!-- 会社側明細 -->
+<section class="card">
+  <h2>会社が納める税金</h2>
+  <table>
+    <tr><td>法人税(15% / 800万超 23.2%)</td><td class="num" id="tHoujin"></td></tr>
+    <tr><td>地方法人税(法人税×10.3%)</td><td class="num" id="tChihou"></td></tr>
+    <tr><td>法人住民税 法人税割(標準7.0%)</td><td class="num" id="tJuminK"></td></tr>
+    <tr><td>法人住民税 均等割(県2万+市5万)</td><td class="num" id="tKinto"></td></tr>
+    <tr><td>法人事業税+特別法人事業税</td><td class="num" id="tJigyo"></td></tr>
+    <tr><td><span data-i18n>消費税・地方消費税</span> <span id="vatModeLbl" style="font-size:11px;color:var(--md-on-surface-variant)"></span></td><td class="num" id="tVat"></td></tr>
+    <tr class="total"><td>法人納税合計</td><td class="num" id="tCorpTotal"></td></tr>
+  </table>
+</section>
+
+<!-- 個人側明細 -->
+<section class="card">
+  <h2>個人(役員報酬)側の負担</h2>
+  <table>
+    <tr><td>社会保険料(本人負担)</td><td class="num" id="tShahoP"></td></tr>
+    <tr><td class="indent">健康保険+介護+子育て支援金(協会けんぽ)</td><td class="num" id="tKenpo"></td></tr>
+    <tr><td class="indent">厚生年金</td><td class="num" id="tNenkin"></td></tr>
+    <tr><td>所得税(復興税込)</td><td class="num" id="tIT"></td></tr>
+    <tr><td>住民税(概算10%+均等割)</td><td class="num" id="tRT"></td></tr>
+    <tr class="total"><td>個人負担合計(税+社保)</td><td class="num" id="tPersonTotal"></td></tr>
+    <tr><td style="padding-top:10px">小規模企業共済 掛金(積立)</td><td class="num" id="tKyosai" style="padding-top:10px;color:var(--c-kyosai)"></td></tr>
+    <tr><td>手取り(報酬+賞与−税・社保・共済)</td><td class="num" id="tTedori" style="font-weight:700;color:var(--c-tedori)"></td></tr>
+  </table>
+  <table style="margin-top:12px">
+    <tr><td>社会保険料(会社負担・役員分)</td><td class="num" id="tShahoC"></td></tr>
+    <tr><td>法定福利費(従業員分・雇用/労災込 概算)</td><td class="num" id="tStaffShaho"></td></tr>
+  </table>
+</section>
+
+<ul class="note">
+  <li>資本金1,000万円以下・従業員は代表1名の株式会社を前提とした概算です。健康保険料率は協会けんぽ令和8年度の都道府県別料率(+子ども・子育て支援金0.23%、介護保険1.62%)を使用。端数処理・標準報酬月額の等級は簡略化しています。</li>
+  <li>役員賞与は「事前確定届出給与」として税務署へ届出済み・届出どおり支給する前提で損金算入しています(届出なし・不一致支給は損金不算入)。社保は年1回支給前提で、健康保険は年573万円・厚生年金は1回150万円の標準賞与額上限を適用。</li>
+  <li>従業員の法定福利費は「健康保険(都道府県別)+介護+子育て支援金の折半、厚生年金折半、子ども・子育て拠出金0.36%、雇用保険0.9%、労災保険0.3%」の合計率(給与のおよそ16〜17%)で概算しています。介護保険は全従業員分を含む簡略計算です。従業員本人負担分は給与から控除されるため会社負担には含みません。</li>
+  <li>小規模企業共済の掛金(月1,000〜70,000円)は全額が所得控除(小規模企業共済等掛金控除)となり、所得税・住民税を圧縮します。掛金は支出ですが積立資産であり、退任・廃業時に共済金として受け取れます(退職所得または公的年金等扱い)。</li>
+  <li>法人事業税は当期損金算入として反復計算で近似。消費税は税抜経理前提(バーには含めず別途納付)。</li>
+  <li>基準期間の課税売上高が5,000万円超の事業年度は簡易課税を選択できません(1,000万円超で免税・2割特例も不可)。売上6,000万円規模では原則課税が前提になります。</li>
+  <li>法人住民税・事業税は標準税率で計算しています。超過課税を実施する自治体(東京都・大阪府・名古屋市など、主に法人税額が大きい場合)では実際の税額がやや増えます。均等割は県2万円+市5万円の標準額。基礎控除・給与所得控除は令和7年度税制改正(令和8年分適用)ベース。</li>
+  <li>正確な申告額は税理士に確認してください。このツールは意思決定の目安用です。</li>
+</ul>
+</div>
+
+<div class="sumbar"><div class="inner">
+  <div class="cell"><div class="k" data-i18n>税+社保</div><div class="v" id="sbTax">–</div></div>
+  <div class="cell"><div class="k" data-i18n>手取り</div><div class="v" id="sbTedori">–</div></div>
+  <div class="cell"><div class="k" data-i18n>会社に残り</div><div class="v" id="sbNaibu">–</div></div>
+</div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+let LANG='ja';try{LANG=localStorage.getItem('ts-lang')||'ja'}catch(e){}
+const LANG_NAMES={ja:'日本語',en:'English','zh-CN':'简体中文','zh-TW':'繁體中文',ko:'한국어',vi:'Tiếng Việt',tl:'Tagalog',ne:'नेपाली',hi:'हिन्दी',tr:'Türkçe'};
+if(!LANG_NAMES[LANG])LANG='ja';
+const MAN_UNIT={ja:'万','zh-CN':'万','zh-TW':'萬',ko:'만'};
+const HERO_UNIT={ja:'万円','zh-CN':'万日元','zh-TW':'萬日圓',ko:'만 엔'};
+let DICT=null;const DCACHE={};
+async function loadDict(l){
+  if(l==='ja'){DICT=null;return true;}
+  if(DCACHE[l]){DICT=DCACHE[l];return true;}
+  try{const r=await fetch('i18n/'+l+'.json');if(!r.ok)return false;DICT=DCACHE[l]=await r.json();return true;}
+  catch(e){return false;}
+}
+function ensureFont(l){
+  if((l==='ne'||l==='hi')&&!document.getElementById('devfont')){
+    const lk=document.createElement('link');lk.id='devfont';lk.rel='stylesheet';
+    lk.href='https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap';
+    document.head.appendChild(lk);
+  }
+}
+const tx=s=>(LANG!=='ja'&&DICT&&DICT.s[s])||s;
+
+const MAN=10000;
+const fmt=v=>LANG==='ja'?Math.round(v).toLocaleString('ja-JP')+' 円':'¥'+Math.round(v).toLocaleString('en-US');
+const fmtMan=v=>(Math.round(v/MAN*10)/10).toLocaleString('ja-JP');
+const fmtC=v=>MAN_UNIT[LANG]?fmtMan(v)+MAN_UNIT[LANG]:('¥'+(Math.abs(v)>=1e6?(v/1e6).toFixed(2)+'M':Math.round(v/1e3)+'K'));
+
+const PREF_KENPO={"北海道":10.28,"青森県":9.85,"岩手県":9.51,"宮城県":10.1,"秋田県":10.01,"山形県":9.75,"福島県":9.5,"茨城県":9.52,"栃木県":9.82,"群馬県":9.68,"埼玉県":9.67,"千葉県":9.73,"東京都":9.85,"神奈川県":9.92,"新潟県":9.21,"富山県":9.59,"石川県":9.7,"福井県":9.71,"山梨県":9.55,"長野県":9.63,"岐阜県":9.8,"静岡県":9.61,"愛知県":9.93,"三重県":9.77,"滋賀県":9.88,"京都府":9.89,"大阪府":10.13,"兵庫県":10.12,"奈良県":9.91,"和歌山県":10.06,"鳥取県":9.86,"島根県":9.94,"岡山県":10.05,"広島県":9.78,"山口県":10.15,"徳島県":10.24,"香川県":10.02,"愛媛県":9.98,"高知県":10.05,"福岡県":10.11,"佐賀県":10.55,"長崎県":10.06,"熊本県":10.08,"大分県":10.08,"宮崎県":9.77,"鹿児島県":10.13,"沖縄県":9.44};
+let vatMode='gensoku';
+
+// ---- 計算ロジック ----
+function kyuyoKojo(s){ // 給与所得控除(令和8年分)
+  if(s<=1900000) return 650000;
+  if(s<=3600000) return s*0.30+80000;
+  if(s<=6600000) return s*0.20+440000;
+  if(s<=8500000) return s*0.10+1100000;
+  return 1950000;
+}
+function kisoKojo(sg){ // 所得税の基礎控除(令和8年分・上乗せ特例込)
+  if(sg<=1320000) return 950000;
+  if(sg<=3360000) return 880000;
+  if(sg<=4890000) return 680000;
+  if(sg<=6550000) return 630000;
+  if(sg<=23500000) return 580000;
+  if(sg<=24000000) return 480000;
+  if(sg<=24500000) return 320000;
+  if(sg<=25000000) return 160000;
+  return 0;
+}
+function shotokuzei(x){ // 累進(復興税別)
+  const b=[[1.95e6,.05,0],[3.3e6,.10,97500],[6.95e6,.20,427500],[9e6,.23,636000],
+           [1.8e7,.33,1536000],[4e7,.40,2796000],[Infinity,.45,4796000]];
+  for(const [lim,r,d] of b) if(x<=lim) return Math.max(0,x*r-d);
+}
+function jigyoShotokuwari(x){
+  return Math.min(x,4e6)*0.035
+       + Math.max(0,Math.min(x,8e6)-4e6)*0.053
+       + Math.max(0,x-8e6)*0.07;
+}
+
+function syncMaxes(salesMan,expMan){
+  // 売上を基準に各スライダーの上限を動的に調整
+  const base=Math.max(salesMan,100);
+  const step=m=>m<=2000?10:m<=20000?50:100;
+  for(const id of ['sExp','sStaff','sSal','sBonus']){
+    const r=$(id); r.max=base; r.step=step(base);
+  }
+  const hz=$('sHikazei'); hz.max=Math.max(expMan,10); hz.step=step(+hz.max);
+  RANGES.forEach(u=>u()); // 進捗グラデーションを再計算
+}
+function calc(){
+  const sales=+$('iSales').value*MAN||0;
+  const exp=+$('iExp').value*MAN||0;
+  syncMaxes(sales/MAN,exp/MAN);
+  const sal=+$('iSal').value*MAN||0;
+  const bonus=+$('iBonus').value*MAN||0;
+  const totalComp=sal+bonus;
+  const kaigoOn=$('kaigo').checked;
+  const hikazei=Math.min(exp,(+$('iHikazei').value||0)*MAN);
+
+  // 社会保険(協会けんぽ愛知 概算)
+  const m=sal/12;
+  const kenpoBase=Math.min(m,1390000);
+  const nenkinBase=sal>0?Math.min(Math.max(m,88000),650000):0;
+  const kenpoRate=PREF_KENPO[$('pref').value]/100+0.0023+(kaigoOn?0.0162:0); // 都道府県別+子育て支援金0.23%+介護1.62%(R8)
+  // 賞与分(年1回支給前提): 健保は年573万・厚年は1回150万が上限
+  const kenpoBonusBase=Math.min(bonus,5730000);
+  const nenkinBonusBase=Math.min(bonus,1500000);
+  const kenpoY=kenpoBase*kenpoRate*12 + kenpoBonusBase*kenpoRate;
+  const nenkinY=nenkinBase*0.183*12 + nenkinBonusBase*0.183;
+  const shahoP=(kenpoY+nenkinY)/2;
+  const shahoC=(kenpoY+nenkinY)/2 + (nenkinBase*12+nenkinBonusBase)*0.0036;
+
+  // 従業員の法定福利費(会社負担・概算): 健保介護支援金の折半+厚年折半+子ども拠出+雇用+労災
+  const staff=+$('iStaff').value*MAN||0;
+  const staffRate=(PREF_KENPO[$('pref').value]/100+0.0023+0.0162)/2 + 0.183/2 + 0.0036 + 0.009 + 0.003;
+  const staffShaho=staff*staffRate;
+
+  // 法人所得(事業税を損金算入・反復)
+  const profitBase=sales-exp-staff-staffShaho-sal-bonus-shahoC;
+  let jigyoTotal=0, income=0;
+  for(let i=0;i<10;i++){
+    income=Math.max(0,profitBase-jigyoTotal);
+    const sw=jigyoShotokuwari(income);
+    jigyoTotal=sw+sw*0.37;
+  }
+  const houjin=Math.min(income,8e6)*0.15+Math.max(0,income-8e6)*0.232;
+  const chihou=houjin*0.103;
+  const juminK=houjin*0.07; // 標準税率(県1.0%+市6.0%)
+  const kinto=70000;
+
+  // 消費税
+  const outVat=sales*0.10;
+  let vat=0,lbl='';
+  if(vatMode==='niwari'){vat=outVat*0.2;lbl='(2割特例)'}
+  else if(vatMode==='kani'){vat=outVat*0.5;lbl='(簡易・みなし仕入率50%)'}
+  else if(vatMode==='gensoku'){vat=Math.max(0,outVat-(exp-hikazei)*0.10);lbl='(原則)'}
+  else lbl='(免税)';
+
+  const corpTotal=houjin+chihou+juminK+kinto+jigyoTotal+vat;
+  const naibu=profitBase-jigyoTotal-houjin-chihou-juminK-kinto;
+
+  // 個人(報酬+賞与の合計に課税)
+  const kyosaiY=Math.min(+$('iKyosai').value||0,70000)*12; // 小規模企業共済(全額所得控除)
+  const shotoku=Math.max(0,totalComp-kyuyoKojo(totalComp));
+  const itBase=Math.max(0,shotoku-shahoP-kyosaiY-kisoKojo(shotoku));
+  const it=shotokuzei(itBase)*1.021;
+  const rtBase=Math.max(0,shotoku-shahoP-kyosaiY-430000);
+  const rt=totalComp>0?rtBase*0.10+6000:0;
+  const personTax=it+rt;
+  const tedori=Math.max(0,totalComp-shahoP-personTax-kyosaiY);
+
+  const taxAll=corpTotal-0+personTax;      // 税金(消費税含む)
+  const shahoAll=shahoP+shahoC+staffShaho;
+  const grand=taxAll+shahoAll;
+
+  // ---- 表示 ----
+  if(MAN_UNIT[LANG]){$('heroTotal').textContent=fmtMan(grand);$('heroUnit').textContent=HERO_UNIT[LANG];}else{$('heroTotal').textContent='¥'+(grand/1e6).toFixed(2);$('heroUnit').textContent='M';}
+  $('kRate').textContent=sales>0?((grand/sales*100).toFixed(1)+' %'):'–';
+  $('kSplit').textContent=fmtC(taxAll)+' / '+fmtC(shahoAll);
+  $('kTedori').textContent=fmtC(tedori);
+  $('kNaibu').textContent=(naibu<0?'−':'')+fmtC(Math.abs(naibu));
+  $('kNaibu').style.color=naibu<0?'var(--md-error)':'var(--c-naibu)';
+  $('warnRed').style.display=profitBase<0?'block':'none';
+  $('sbTax').textContent=fmtC(grand);
+  $('sbTedori').textContent=fmtC(tedori);
+  $('sbNaibu').textContent=(naibu<0?'−':'')+fmtC(Math.abs(naibu));
+
+  $('tHoujin').textContent=fmt(houjin);
+  $('tChihou').textContent=fmt(chihou);
+  $('tJuminK').textContent=fmt(juminK);
+  $('tKinto').textContent=fmt(kinto);
+  $('tJigyo').textContent=fmt(jigyoTotal);
+  $('tVat').textContent=fmt(vat);
+  $('vatModeLbl').textContent=tx(lbl);
+  $('tCorpTotal').textContent=fmt(corpTotal);
+
+  $('tShahoP').textContent=fmt(shahoP);
+  $('tKenpo').textContent=fmt(kenpoY/2);
+  $('tNenkin').textContent=fmt(nenkinY/2);
+  $('tIT').textContent=fmt(it);
+  $('tRT').textContent=fmt(rt);
+  $('tKyosai').textContent=fmt(kyosaiY);
+  $('tPersonTotal').textContent=fmt(shahoP+personTax);
+  $('tTedori').textContent=fmt(tedori);
+  $('tShahoC').textContent=fmt(shahoC);
+  $('tStaffShaho').textContent=fmt(staffShaho);
+
+  // ウォーターフォール(売上→会社に残る金額)
+  const corpNationLocal=houjin+chihou+juminK+kinto;
+  const steps=[
+    ['売上高(税抜)',null,sales],
+    ['経費',-exp,null],
+    ['従業員給与',-staff,null],
+    ['法定福利費(従業員・概算)',-staffShaho,null],
+    ['役員報酬・賞与',-(sal+bonus),null],
+    ['社会保険料(会社負担)',-shahoC,null],
+    ['法人事業税+特別法人事業税',-jigyoTotal,null],
+    ['法人税・地方法人税・法人住民税',-corpNationLocal,null],
+  ];
+  let rest=sales, rows='';
+  for(const [name,delta,abs] of steps){
+    if(delta!==null) rest+=delta;
+    rows+=`<tr><td>${tx(name)}</td><td class="num" style="color:${delta!==null?'var(--md-on-surface-variant)':'inherit'}">${delta!==null?('−'+fmt(-delta)):fmt(abs)}</td></tr>`;
+  }
+  $('wfBody').innerHTML=rows;
+  $('wfFinal').textContent=(rest<0?'−':'')+fmt(Math.abs(rest));
+  $('wfFinal').style.color=rest<0?'var(--md-error)':'var(--c-naibu)';
+
+  // フローバー(税抜売上ベース、消費税は別枠)
+  const corpTaxNoVat=corpTotal-vat;
+  const segs=[
+    ['経費',exp,'--c-expense'],
+    ['従業員人件費',staff+staffShaho,'--c-staff'],
+    ['社保(役員)',shahoP+shahoC,'--c-shaho'],
+    ['法人税等',corpTaxNoVat,'--c-corp'],
+    ['個人税',personTax,'--c-person'],
+    ['共済積立',kyosaiY,'--c-kyosai'],
+    ['手取り',tedori,'--c-tedori'],
+    ['内部留保',Math.max(0,naibu),'--c-naibu'],
+  ];
+  const base=Math.max(sales,1);
+  const bar=$('flowbar'),lg=$('legend');
+  bar.innerHTML='';lg.innerHTML='';
+  for(const [name,v,cv] of segs){
+    if(v<=0) continue;
+    const d=document.createElement('div');
+    d.style.width=(v/base*100)+'%';
+    d.style.background=`var(${cv})`;
+    if(name==='手取り')d.className='seg-tedori';
+    d.title=`${tx(name)} ${fmtC(v)}`;
+    bar.appendChild(d);
+    const s=document.createElement('span');
+    s.innerHTML=`<i style="background:var(${cv})"></i>${tx(name)} ${fmtC(v)}`;
+    lg.appendChild(s);
+  }
+  if(vat>0){
+    const s=document.createElement('span');
+    s.innerHTML=`<i style="background:var(--c-vat)"></i>${tx('消費税(別途預り納付)')} ${fmtC(vat)}`;
+    lg.appendChild(s);
+  }
+}
+
+// ---- 入力バインド ----
+const RANGES=[];
+function bindPair(num,rng){
+  const n=$(num),r=$(rng);
+  const upd=()=>{r.style.setProperty('--p',(Math.min(r.value/r.max,1)*100)+'%')};
+  RANGES.push(upd);
+  n.addEventListener('input',()=>{
+    if(+n.value>+r.max) r.max=Math.ceil(+n.value/1000)*1000; // 上限を自動拡張
+    r.value=n.value;upd();calc()});
+  r.addEventListener('input',()=>{n.value=r.value;upd();calc()});
+  upd();
+}
+bindPair('iSales','sSales');bindPair('iExp','sExp');bindPair('iStaff','sStaff');bindPair('iSal','sSal');bindPair('iBonus','sBonus');bindPair('iKyosai','sKyosai');bindPair('iHikazei','sHikazei');
+$('kaigo').addEventListener('change',calc);
+$('pref').addEventListener('change',calc);
+$('vatChips').addEventListener('click',e=>{
+  const b=e.target.closest('.chip');if(!b)return;
+  document.querySelectorAll('#vatChips .chip').forEach(c=>c.classList.remove('on'));
+  b.classList.add('on');vatMode=b.dataset.v;
+  $('ratioField').style.display=vatMode==='gensoku'?'block':'none';
+  calc();
+});
+
+async function applyLang(){
+  const ok=await loadDict(LANG);
+  if(!ok){LANG='ja';DICT=null;}
+  ensureFont(LANG);
+  document.documentElement.lang=LANG;
+  document.title=tx('法人税シミュレーター2026');
+  const els=document.querySelectorAll('h1,header .sub,header .badge,[data-i18n],.hero>.lbl,.flow>.lbl,.kpi .k,#warnRed,td,.card .note,.card>h2');
+  els.forEach(el=>{
+    if(el.closest('#wfBody'))return;
+    if(el.classList&&el.classList.contains('num'))return;
+    if(el.children.length)return;
+    if(!el.dataset.ja)el.dataset.ja=el.textContent.trim();
+    el.textContent=LANG==='ja'?el.dataset.ja:((DICT&&DICT.s[el.dataset.ja])||el.dataset.ja);
+  });
+  document.querySelectorAll('.note li').forEach((li,i)=>{
+    if(!li.dataset.ja)li.dataset.ja=li.textContent.trim();
+    li.textContent=LANG==='ja'?li.dataset.ja:((DICT&&DICT.n[i])||li.dataset.ja);
+  });
+  const sel=$('langSel');if(sel.value!==LANG)sel.value=LANG;
+  calc();
+}
+$('langSel').addEventListener('change',e=>{
+  LANG=e.target.value;
+  try{localStorage.setItem('ts-lang',LANG)}catch(_){}
+  applyLang();
+});
+applyLang();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+</script>
+</body>
+</html>
