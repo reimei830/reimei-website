@@ -25,6 +25,7 @@ export default function Footer() {
                 { href: '/#achievements', label: '実績' },
                 { href: '/#company', label: '会社概要' },
                 { href: '/columns', label: 'コラム' },
+                { href: '/taxsim', label: '法人税シミュレーター' },
                 { href: '/contact', label: 'お問い合わせ' },
                 { href: '/privacy', label: 'プライバシーポリシー' },
               ].map((link) => (
