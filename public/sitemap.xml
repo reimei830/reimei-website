@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://reimei.tech/columns</loc>
-    <lastmod>2026-07-22</lastmod>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -29,6 +29,24 @@
     <lastmod>2026-07-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://reimei.tech/columns/yakuin-hoshu-kimekata</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://reimei.tech/columns/hitori-houjin-shaho</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://reimei.tech/columns/shouhizei-houshiki</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://reimei.tech/columns/kigyo-junbi-matome</loc>

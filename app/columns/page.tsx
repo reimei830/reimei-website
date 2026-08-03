@@ -14,6 +14,27 @@ export const metadata: Metadata = {
 
 const ARTICLES = [
   {
+    href: '/columns/yakuin-hoshu-kimekata',
+    title: '役員報酬はいくらにする?一人法人の決め方と税金・社会保険のバランス【2026年版】',
+    description:
+      '定期同額給与のルール、変更できるタイミング、法人税と個人の税金・社会保険料のバランス、事前確定届出給与による役員賞与の活用まで整理しました。',
+    date: '2026年8月3日',
+  },
+  {
+    href: '/columns/hitori-houjin-shaho',
+    title: '一人法人の社会保険料はいくら?協会けんぽの仕組みと計算方法【2026年版】',
+    description:
+      '加入義務、協会けんぽの令和8年度料率、標準報酬月額の仕組み、賞与の上限、国保・国民年金との違いを一人法人向けに解説します。',
+    date: '2026年8月3日',
+  },
+  {
+    href: '/columns/shouhizei-houshiki',
+    title: '消費税はどの方式で納める?免税・2割特例・簡易課税・原則課税の違い【2026年版】',
+    description:
+      '免税事業者の条件、インボイス発行事業者の2割特例、簡易課税のみなし仕入率、原則課税との有利判定の考え方を解説します。',
+    date: '2026年8月3日',
+  },
+  {
     href: '/columns/kigyo-junbi-matome',
     title: '一人法人の起業準備まとめ — 設立から会計まで7ステップ【2026年版】',
     description:

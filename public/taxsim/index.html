@@ -19,6 +19,9 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"法人税シミュレーター2026","url":"https://reimei.tech/taxsim","description":"一人法人向けに法人税・消費税・社会保険料・手取り額を即算出する無料シミュレーター。協会けんぽ令和8年度の47都道府県別料率に対応。","applicationCategory":"FinanceApplication","operatingSystem":"Web","inLanguage":"ja","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"publisher":{"@type":"Organization","name":"株式会社黎明","url":"https://reimei.tech"}}
 </script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "入力したデータはどこかに送信されますか?", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。売上や役員報酬などの入力値は、すべてお使いの端末のブラウザ内で計算され、当社のサーバーには一切送信・保存されません。"}}, {"@type": "Question", "name": "計算結果はどのくらい正確ですか?", "acceptedAnswer": {"@type": "Answer", "text": "資本金1,000万円以下・従業員は代表1名の株式会社を前提とした概算です。標準報酬月額の等級や端数処理を簡略化しているため、実際の納税額・保険料とは差が生じます。正確な金額は税理士にご確認ください。"}}, {"@type": "Question", "name": "合同会社でも使えますか?", "acceptedAnswer": {"@type": "Answer", "text": "法人税・消費税・社会保険料の仕組みは合同会社もほぼ同じため、目安としては利用できます。ただし本ツールの前提は株式会社です。"}}, {"@type": "Question", "name": "個人事業主ですが、法人成りの判断に使えますか?", "acceptedAnswer": {"@type": "Answer", "text": "はい、参考になります。想定売上・経費と自分に払いたい報酬額を入力すると、法人化した場合の税・社会保険料・手取りの全体像がつかめます。"}}, {"@type": "Question", "name": "消費税はどの方式を選べばよいですか?", "acceptedAnswer": {"@type": "Answer", "text": "基準期間の課税売上高が1,000万円以下でインボイス登録が不要なら免税、インボイス登録した小規模事業者は2割特例、それ以降は経費構成に応じて簡易課税か原則課税を選ぶのが基本の流れです。"}}, {"@type": "Question", "name": "料率は毎年変わりますか?", "acceptedAnswer": {"@type": "Answer", "text": "協会けんぽの健康保険料率は毎年3月分から改定されます。本ツールは令和8年度(2026年度)の料率を使用しており、翌年度版への更新を予定しています。"}}]}
+</script>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
@@ -338,6 +341,75 @@ tr:last-child td{border-bottom:none}
   <li>法人住民税・事業税は標準税率で計算しています。超過課税を実施する自治体(東京都・大阪府・名古屋市など、主に法人税額が大きい場合)では実際の税額がやや増えます。均等割は県2万円+市5万円の標準額。基礎控除・給与所得控除は令和7年度税制改正(令和8年分適用)ベース。</li>
   <li>正確な申告額は税理士に確認してください。このツールは意思決定の目安用です。</li>
 </ul>
+
+<!-- 解説・FAQ(日本語表示時のみ。SEO/AdSense向けコンテンツ) -->
+<div id="guideSec">
+<style>
+#guideSec h3{font-size:17px;line-height:22px;font-weight:700;margin:0 0 10px}
+#guideSec p{font-size:15px;line-height:22px;color:var(--label);margin:0 0 12px}
+#guideSec p:last-child{margin-bottom:0}
+#guideSec ul.plain{margin:0 0 12px;padding-left:20px}
+#guideSec ul.plain li{font-size:15px;line-height:22px;margin-bottom:8px}
+#guideSec a{color:var(--tint);text-decoration:none}
+#guideSec details{border-bottom:0.5px solid var(--sep);padding:12px 0}
+#guideSec details:last-of-type{border-bottom:none;padding-bottom:4px}
+#guideSec summary{font-size:15px;line-height:20px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:8px}
+#guideSec summary::after{content:"+";color:var(--label3);font-size:19px;flex-shrink:0}
+#guideSec details[open] summary::after{content:"−"}
+#guideSec details p{margin-top:10px;color:var(--label2)}
+</style>
+
+<section class="card">
+  <h3>このシミュレーターについて</h3>
+  <p>法人税シミュレーター2026は、一人法人(株式会社)の経営者向けに、売上・経費・役員報酬を入力するだけで「会社と個人を合わせた税金・社会保険料の総額」と「最終的な手取り額」を試算する無料ツールです。株式会社黎明が、自社の経営で毎年行っていた試算をツール化して公開しています。</p>
+  <p>法人の税金は、法人税・地方法人税・法人住民税・法人事業税・消費税と種類が多いうえ、役員報酬の設定しだいで個人側の所得税・住民税・社会保険料も連動して変わります。このため「役員報酬をいくらにすれば手残りが最大になるか」は表計算では追いにくく、本ツールでは全税目を同時に反復計算することで、報酬額を動かしたときの影響を即座に確認できるようにしました。</p>
+  <p>計算に使っている料率は、協会けんぽ令和8年度の47都道府県別健康保険料率(子ども・子育て支援金0.23%、介護保険1.62%を含む)、厚生年金18.3%、法人税の軽減税率15%(所得800万円以下)と23.2%、消費税の4方式(免税・2割特例・簡易課税・原則課税)です。前提条件の詳細は上記の注記をご覧ください。</p>
+</section>
+
+<section class="card">
+  <h3>役員報酬の決め方に迷ったら</h3>
+  <p>役員報酬は原則として事業年度開始から3か月以内にしか変更できず、期中の増減は損金不算入になります。期首に1年分を見込んで決める必要があるため、本ツールで報酬額を複数パターン試し、税・社保の合計負担を比較してから決めるのがおすすめです。制度の詳しい解説は、以下のコラムをご覧ください。</p>
+  <ul class="plain">
+    <li><a href="/columns/yakuin-hoshu-kimekata">役員報酬はいくらにする?一人法人の決め方と税金・社会保険のバランス</a></li>
+    <li><a href="/columns/hitori-houjin-shaho">一人法人の社会保険料はいくら?協会けんぽの仕組みと計算方法</a></li>
+    <li><a href="/columns/shouhizei-houshiki">消費税はどの方式で納める?免税・2割特例・簡易課税・原則課税の違い</a></li>
+  </ul>
+</section>
+
+<section class="card">
+  <h3>よくある質問</h3>
+  <details>
+    <summary>入力したデータはどこかに送信されますか?</summary>
+    <p>いいえ。売上や役員報酬などの入力値は、すべてお使いの端末のブラウザ内で計算され、当社のサーバーには一切送信・保存されません。安心してご利用ください。詳細は<a href="/privacy">プライバシーポリシー</a>をご覧ください。</p>
+  </details>
+  <details>
+    <summary>計算結果はどのくらい正確ですか?</summary>
+    <p>資本金1,000万円以下・従業員は代表1名の株式会社を前提とした概算です。標準報酬月額の等級や端数処理を簡略化しているため、実際の納税額・保険料とは差が生じます。意思決定の目安としてご利用のうえ、正確な金額は税理士にご確認ください。</p>
+  </details>
+  <details>
+    <summary>合同会社でも使えますか?</summary>
+    <p>法人税・消費税・社会保険料の仕組みは合同会社もほぼ同じため、目安としては利用できます。ただし本ツールの前提は株式会社です。役員報酬(役員給与)のルールや均等割は共通ですが、細部は専門家にご確認ください。</p>
+  </details>
+  <details>
+    <summary>個人事業主ですが、法人成りの判断に使えますか?</summary>
+    <p>はい、参考になります。想定売上・経費と自分に払いたい報酬額を入力すると、法人化した場合の税・社保・手取りの全体像がつかめます。個人事業のままの場合の税額とは計算体系が異なるため、最終判断は両者を並べて比較することをおすすめします。</p>
+  </details>
+  <details>
+    <summary>消費税はどの方式を選べばよいですか?</summary>
+    <p>基準期間の課税売上高が1,000万円以下でインボイス登録が不要なら免税、インボイス登録した小規模事業者は2割特例(令和8年9月30日を含む課税期間まで)、それ以降は経費構成に応じて簡易課税か原則課税を選ぶのが基本の流れです。本ツールで4方式を切り替えて納税額を比較できます。</p>
+  </details>
+  <details>
+    <summary>料率は毎年変わりますか?</summary>
+    <p>協会けんぽの健康保険料率は毎年3月分から改定されます。本ツールは令和8年度(2026年度)の料率を使用しており、翌年度版への更新を予定しています。</p>
+  </details>
+</section>
+
+<section class="card">
+  <h3>運営者</h3>
+  <p>本ツールは<a href="https://reimei.tech/">株式会社黎明</a>(愛知県名古屋市)が開発・運営しています。製造業向け自動化設備の電気設計施工を本業とする一人法人であり、自社の税務・経営で得た知見をもとに、<a href="/columns">一人法人向けの会計・税務コラム</a>とあわせて本ツールを提供しています。ご意見・不具合のご報告は<a href="/contact">お問い合わせフォーム</a>までお寄せください。</p>
+</section>
+</div>
+
 </div>
 
 <div class="sumbar"><div class="inner">
@@ -611,6 +683,7 @@ async function applyLang(){
     if(!li.dataset.ja)li.dataset.ja=li.textContent.trim();
     li.textContent=LANG==='ja'?li.dataset.ja:((DICT&&DICT.n[i])||li.dataset.ja);
   });
+  const g=document.getElementById('guideSec');if(g)g.style.display=LANG==='ja'?'':'none';
   const sel=$('langSel');if(sel.value!==LANG)sel.value=LANG;
   calc();
 }
