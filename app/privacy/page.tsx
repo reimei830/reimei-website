@@ -25,7 +25,9 @@ export default function PrivacyPage() {
           <h1 className="text-3xl sm:text-4xl font-bold text-white leading-snug mb-4">
             プライバシーポリシー
           </h1>
-          <p className="text-gray-500 text-sm mb-10">制定日: 2026年7月22日 / 株式会社黎明</p>
+          <p className="text-gray-500 text-sm mb-10">
+            制定日: 2026年7月22日(最終改定: 2026年8月3日)/ 株式会社黎明
+          </p>
 
           <section className="space-y-4 text-gray-300 leading-relaxed mb-10">
             <p>
@@ -40,6 +42,37 @@ export default function PrivacyPage() {
             <p>
               お問い合わせフォームからご連絡いただいた場合、お名前・会社名・メールアドレス・電話番号等を取得します。
               これらはお問い合わせへの対応のみに利用し、ご本人の同意なく第三者に提供することはありません。
+            </p>
+            <p>
+              <span className="text-white font-medium">広告について(Google AdSense)</span> —
+              当サイトでは、第三者配信の広告サービス「Google AdSense」を利用しています。
+              Googleなどの第三者配信事業者は、Cookieや広告識別子を使用して、
+              当サイトや他のサイトへの過去のアクセス情報に基づく広告(パーソナライズド広告)を配信することがあります。
+              パーソナライズド広告は、
+              <a
+                href="https://adssettings.google.com/authenticated?hl=ja"
+                target="_blank"
+                rel="noopener"
+                className="text-neon-blue hover:text-white transition-colors duration-200"
+              >
+                Googleの広告設定
+              </a>
+              でいつでも無効にできます。Googleによる広告Cookieの利用の詳細は
+              <a
+                href="https://policies.google.com/technologies/ads?hl=ja"
+                target="_blank"
+                rel="noopener"
+                className="text-neon-blue hover:text-white transition-colors duration-200"
+              >
+                Googleのポリシーと規約(広告)
+              </a>
+              をご確認ください。欧州経済領域(EEA)・英国等の利用者に対しては、
+              同意管理プラットフォームにより広告に関する同意を取得します。
+            </p>
+            <p>
+              <span className="text-white font-medium">アクセス解析について</span> —
+              当サイトでは、サイトの利用状況を把握し改善に役立てるため、Vercel Web Analyticsを利用しています。
+              これはCookieを使用せず、個人を特定しない形で集計されたページビュー・訪問情報を取得するものです。
             </p>
           </section>
 
