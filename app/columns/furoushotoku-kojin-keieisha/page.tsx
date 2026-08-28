@@ -281,7 +281,11 @@ export default function FuroushotokuKojinKeieishaPage() {
               <li>
                 <span className="text-white font-medium">退職金(退職所得控除)</span> —
                 法人に貯めた利益の最終出口。勤続20年超なら控除が年70万円に増え、控除後の半分にしか課税されない別格の優遇。
-                「法人で運用 → 退職金で受け取る」は経営者の王道ルートです。
+                「法人で運用 → 退職金で受け取る」は経営者の王道ルートです。詳しくは
+                <Link href="/columns/keieisha-taishokukin" className="text-neon-blue hover:text-white transition-colors duration-200">
+                  経営者の退職金設計
+                </Link>
+                を参照してください。
               </li>
               <li>
                 <span className="text-white font-medium">小規模企業共済</span> —
