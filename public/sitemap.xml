@@ -31,6 +31,12 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://reimei.tech/columns/keieisha-taishokukin</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://reimei.tech/columns/furoushotoku-kojin-keieisha</loc>
     <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>

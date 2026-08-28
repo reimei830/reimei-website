@@ -14,6 +14,13 @@ export const metadata: Metadata = {
 
 const ARTICLES = [
   {
+    href: '/columns/keieisha-taishokukin',
+    title: '経営者の退職金はいくら取れる?退職所得控除と共済・iDeCoの出口戦略【2026年版】',
+    description:
+      '退職所得控除と2分の1課税の計算例、功績倍率法による損金算入の目安、小規模企業共済・iDeCo・セーフティ共済の使い分け、2026年施行の10年ルールと受け取り順序まで整理しました。',
+    date: '2026年8月28日',
+  },
+  {
     href: '/columns/furoushotoku-kojin-keieisha',
     title: '不労所得はどうつくる?年収1,200万円の個人と会社経営者の最適解【2026年版】',
     description:
