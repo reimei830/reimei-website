@@ -14,6 +14,13 @@ export const metadata: Metadata = {
 
 const ARTICLES = [
   {
+    href: '/columns/furoushotoku-kojin-keieisha',
+    title: '不労所得はどうつくる?年収1,200万円の個人と会社経営者の最適解【2026年版】',
+    description:
+      '高配当株・インデックス投資・不動産・REITなど代表的な8つの方法を、個人と法人それぞれの税率から比較。共済・退職金出口まで含めた経営者の設計手順も解説します。',
+    date: '2026年8月28日',
+  },
+  {
     href: '/columns/yakuin-hoshu-kimekata',
     title: '役員報酬はいくらにする?一人法人の決め方と税金・社会保険のバランス【2026年版】',
     description:
