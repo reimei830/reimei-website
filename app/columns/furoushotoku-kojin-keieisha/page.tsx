@@ -276,7 +276,11 @@ export default function FuroushotokuKojinKeieishaPage() {
               <li>
                 <span className="text-white font-medium">資産管理法人</span> —
                 不動産や事業投資を本業法人と切り離して持つ器。所得分散(家族役員への報酬)、相続・事業承継対策、
-                本業への影響遮断が狙い。維持コスト(法人住民税の均等割 年7万円〜+税理士報酬)を上回る規模になってから。
+                本業への影響遮断が狙い。維持コスト(法人住民税の均等割 年7万円〜+税理士報酬)を上回る規模になってから。詳しくは
+                <Link href="/columns/shisan-kanri-houjin" className="text-neon-blue hover:text-white transition-colors duration-200">
+                  資産管理法人の設立基準
+                </Link>
+                を参照してください。
               </li>
               <li>
                 <span className="text-white font-medium">退職金(退職所得控除)</span> —
