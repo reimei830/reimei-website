@@ -14,6 +14,13 @@ export const metadata: Metadata = {
 
 const ARTICLES = [
   {
+    href: '/columns/shisan-kanri-houjin',
+    title: '本業法人と分けるべきか?資産管理法人の設立基準とメリット・デメリット【2026年版】',
+    description:
+      '税率差・家族への所得分散・相続対策のメリットから、維持コスト・社会保険の二以上勤務・上場株が不利になる注意点、不動産の3つの持たせ方まで整理しました。',
+    date: '2026年8月30日',
+  },
+  {
     href: '/columns/keieisha-taishokukin',
     title: '経営者の退職金はいくら取れる?退職所得控除と共済・iDeCoの出口戦略【2026年版】',
     description:
