@@ -730,7 +730,7 @@ export default function Company() {
     { label: '会社名', value: '株式会社黎明', sub: 'Reimei Inc.' },
     { label: '設立', value: '2020年10月2日' },
     { label: '代表者', value: '堀内 黎希' },
-    { label: '所在地', value: '〒454-0972\n愛知県名古屋市中川区服部2丁目308' },
+    { label: '所在地', value: '〒454-0976\n愛知県名古屋市中川区服部2丁目308' },
     { label: '電話番号', value: '052-893-6763', isPhone: true },
     { label: '営業時間', value: '9:00〜18:00' },
   ]
@@ -845,7 +845,7 @@ export default function Footer() {
           </div>
           <div>
             <h3 className="text-xl font-bold text-white mb-4">お問い合わせ</h3>
-            <p className="text-gray-500 mb-2">〒454-0972</p>
+            <p className="text-gray-500 mb-2">〒454-0976</p>
             <p className="text-gray-500 mb-2">愛知県名古屋市中川区服部2丁目308</p>
             <p className="text-gray-500 mb-2">TEL: 052-893-6763</p>
             <p className="text-gray-500">営業時間: 9:00〜18:00</p>
