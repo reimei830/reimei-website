@@ -12,7 +12,7 @@ export default function Footer() {
           </div>
           <div>
             <h3 className="text-xl font-bold text-white mb-4">お問い合わせ</h3>
-            <p className="text-gray-500 mb-2">〒454-0972</p>
+            <p className="text-gray-500 mb-2">〒454-0976</p>
             <p className="text-gray-500 mb-2">愛知県名古屋市中川区服部2丁目308</p>
             <p className="text-gray-500 mb-2">TEL: 052-893-6763</p>
             <p className="text-gray-500">営業時間: 9:00〜18:00</p>
